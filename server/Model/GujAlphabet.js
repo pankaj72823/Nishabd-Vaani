@@ -1,5 +1,4 @@
-import { Schema, model } from 'mongoose';
-
+import { Schema,model } from "mongoose";
 const alphabetSchema = new Schema({
   alphabet: {
     type: String,
@@ -17,6 +16,6 @@ const alphabetSchema = new Schema({
   },
 });
 
-const Alphabet = model('Alphabet', alphabetSchema);
+const GujAlphabet = model('GujAlphabet', alphabetSchema);
 
-export default Alphabet;
+export default GujAlphabet
