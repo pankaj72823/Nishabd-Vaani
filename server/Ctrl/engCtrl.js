@@ -1,5 +1,5 @@
 import wrapAsync from '../Utils/wrapAsync.js'
-import Alphabet from '../Model/Images.js';
+import EngAlphabet from '../Model/EngAlphabet.js';
 
 let currentAlphabetIndexEng = 0;
 const alphabetsEng = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
@@ -33,7 +33,7 @@ async function generateQuiz(currentAlphabet, alphabetSet) {
 
   const quizOptions = getRandomAlphabets(3);
 
-  const options = await Alphabet.find({ alphabet: { $in: quizOptions } }).select('signImage alphabet');
+  const options = await EngAlphabet.find({ alphabet: { $in: quizOptions } }).select('signImage alphabet');
 
   const quiz = {
     "flag": 'quiz',
@@ -54,7 +54,7 @@ async function generateQuiz(currentAlphabet, alphabetSet) {
 export const alphabetEng = wrapAsync(async (req, res) => {
     currentAlphabetIndexEng = 0;
   const currentAlphabet = alphabetsEng[0];
-  const data = await Alphabet.findOne({ alphabet: currentAlphabet }).select('-_id -__v').lean();
+  const data = await EngAlphabet.findOne({ alphabet: currentAlphabet }).select('-_id -__v').lean();
   data.flag = "Learn"
   currentAlphabetIndexEng = (currentAlphabetIndexEng + 1) % alphabetsEng.length;
   return res.json(data);
@@ -62,7 +62,7 @@ export const alphabetEng = wrapAsync(async (req, res) => {
 
 export const alphabetEngNext = wrapAsync(async (req, res) => {
   const currentAlphabet = alphabetsEng[currentAlphabetIndexEng];
-  const data = await Alphabet.findOne({ alphabet: currentAlphabet }).select('-_id -__v').lean();
+  const data = await EngAlphabet.findOne({ alphabet: currentAlphabet }).select('-_id -__v').lean();
   data.flag = "Learn"
 
   if (flagEng) {
@@ -87,7 +87,7 @@ export const alphabetEngPrev = wrapAsync(async (req, res) => {
   }
   const currentAlphabet = alphabetsEng[currentAlphabetIndexEng-2];
 
-  const data = await Alphabet.findOne({ alphabet: currentAlphabet }).select('-_id -__v').lean();
+  const data = await EngAlphabet.findOne({ alphabet: currentAlphabet }).select('-_id -__v').lean();
   data.flag = "Learn"
  
   if(flagEng){

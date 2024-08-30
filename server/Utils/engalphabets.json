@@ -1,0 +1,234 @@
+[{
+  "_id": {
+    "$oid": "66d17248a5254530cc6132cd"
+  },
+  "alphabet": "A",
+  "signImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002309/EnglishAlphabets/lanashqdw04w9quhlhcz.jpg",
+  "objectImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002311/EnglishAlphabets/geozaffkmppn2lwe1vsc.jpg",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d1724aa5254530cc6132cf"
+  },
+  "alphabet": "B",
+  "signImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002312/EnglishAlphabets/y41elllzrjqgeuzkzu3d.jpg",
+  "objectImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002314/EnglishAlphabets/z8nbvhuofzfzygilbqcg.jpg",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d1724ca5254530cc6132d1"
+  },
+  "alphabet": "C",
+  "signImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002315/EnglishAlphabets/svu3tzixg5h4qw6bpkbj.jpg",
+  "objectImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002316/EnglishAlphabets/tkqpoomvlwvctiwocu6m.jpg",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d1724fa5254530cc6132d3"
+  },
+  "alphabet": "D",
+  "signImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002317/EnglishAlphabets/fzxfqnjsp99e3avry5au.jpg",
+  "objectImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002318/EnglishAlphabets/qabqvusese7z4ffqkzap.jpg",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d17251a5254530cc6132d5"
+  },
+  "alphabet": "E",
+  "signImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002320/EnglishAlphabets/pd3ciqjjrtbxuxcbrt4u.jpg",
+  "objectImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002320/EnglishAlphabets/ekvtg0oqybo5ixnf72ph.jpg",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d17253a5254530cc6132d7"
+  },
+  "alphabet": "F",
+  "signImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002321/EnglishAlphabets/diyw7nh4vrr5l84oxevi.jpg",
+  "objectImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002323/EnglishAlphabets/lw6iscxdybn9ll6tahbg.jpg",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d17255a5254530cc6132d9"
+  },
+  "alphabet": "G",
+  "signImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002324/EnglishAlphabets/nr6m20vfq3sizdouw169.jpg",
+  "objectImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002325/EnglishAlphabets/roodsbw7bwhqne87az3t.jpg",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d17258a5254530cc6132db"
+  },
+  "alphabet": "H",
+  "signImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002326/EnglishAlphabets/wvxb0ww9wgshi7czlyyz.jpg",
+  "objectImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002327/EnglishAlphabets/kikfymvrsgcc8mhdxmsw.jpg",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d1725aa5254530cc6132dd"
+  },
+  "alphabet": "I",
+  "signImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002329/EnglishAlphabets/x3nsxgxshpj8ktclfbjc.jpg",
+  "objectImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002329/EnglishAlphabets/rmj0h8j5gziaw2fx1aqb.jpg",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d1725da5254530cc6132df"
+  },
+  "alphabet": "J",
+  "signImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002331/EnglishAlphabets/fl8ufbz1qnzvvr5nfhp4.jpg",
+  "objectImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002332/EnglishAlphabets/hpn9xatr9hct4q4cq54z.jpg",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d17260a5254530cc6132e1"
+  },
+  "alphabet": "K",
+  "signImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002333/EnglishAlphabets/bbvyftbigv9vkjinqqz7.jpg",
+  "objectImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002335/EnglishAlphabets/xoh68fufhg37tdapaxie.jpg",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d17264a5254530cc6132e3"
+  },
+  "alphabet": "L",
+  "signImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002337/EnglishAlphabets/hzabv4ne0dwcsm7fwu62.jpg",
+  "objectImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002339/EnglishAlphabets/esoiazh9rn0fxtkqvot1.jpg",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d17266a5254530cc6132e5"
+  },
+  "alphabet": "M",
+  "signImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002340/EnglishAlphabets/gwpsx8mckdtkw8uptddj.jpg",
+  "objectImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002341/EnglishAlphabets/u5kreg8fm2bwrvgmzmas.jpg",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d17269a5254530cc6132e7"
+  },
+  "alphabet": "N",
+  "signImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002343/EnglishAlphabets/jxgiwvin3lfvhlgdtapl.jpg",
+  "objectImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002344/EnglishAlphabets/l4uev1aqt6zmumsmcols.jpg",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d1726ba5254530cc6132e9"
+  },
+  "alphabet": "O",
+  "signImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002345/EnglishAlphabets/ezd8vkwweyeb0ihpcsap.jpg",
+  "objectImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002347/EnglishAlphabets/dyjsrmvsndhrfv4qo2fa.jpg",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d1726da5254530cc6132eb"
+  },
+  "alphabet": "P",
+  "signImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002348/EnglishAlphabets/ril4oqfoizdskjccmmz5.jpg",
+  "objectImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002349/EnglishAlphabets/ts1qqtqwr8gcfamrtogu.jpg",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d1726fa5254530cc6132ed"
+  },
+  "alphabet": "Q",
+  "signImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002350/EnglishAlphabets/ssws4l6sm44djzj1sqy6.jpg",
+  "objectImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002351/EnglishAlphabets/g986iocqrscr3qf0d63w.jpg",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d17271a5254530cc6132ef"
+  },
+  "alphabet": "R",
+  "signImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002352/EnglishAlphabets/d8i6ucyyx7t9xmr4i47r.jpg",
+  "objectImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002353/EnglishAlphabets/e5n0ez2ok5zsuy6n4tyi.jpg",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d17273a5254530cc6132f1"
+  },
+  "alphabet": "S",
+  "signImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002354/EnglishAlphabets/weqztbm1ors6gevc0xhz.jpg",
+  "objectImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002355/EnglishAlphabets/bpfojj5ldxaj0bxvzltq.jpg",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d17276a5254530cc6132f3"
+  },
+  "alphabet": "T",
+  "signImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002356/EnglishAlphabets/gddccxz4dae2ugfvrhtm.jpg",
+  "objectImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002357/EnglishAlphabets/xplnqxgraairyiyqrejz.jpg",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d17278a5254530cc6132f5"
+  },
+  "alphabet": "U",
+  "signImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002359/EnglishAlphabets/jrwcgrh8vwps8csa3adg.jpg",
+  "objectImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002360/EnglishAlphabets/ipzoasjwvlaejqbtgqfg.jpg",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d1727aa5254530cc6132f7"
+  },
+  "alphabet": "V",
+  "signImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002361/EnglishAlphabets/oonszfdadjvafjqqo20a.jpg",
+  "objectImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002362/EnglishAlphabets/okm9gdfifwnj6xcv1izg.jpg",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d1727ca5254530cc6132f9"
+  },
+  "alphabet": "W",
+  "signImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002363/EnglishAlphabets/kb7cb9suzptvwbucfp9o.jpg",
+  "objectImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002364/EnglishAlphabets/yv1vyyryritsisxiumnj.jpg",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d1727ea5254530cc6132fb"
+  },
+  "alphabet": "X",
+  "signImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002365/EnglishAlphabets/imz2j30lp8ihckl2hyq8.jpg",
+  "objectImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002366/EnglishAlphabets/hm99ratrjyxxcknliybk.jpg",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d17280a5254530cc6132fd"
+  },
+  "alphabet": "Y",
+  "signImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002367/EnglishAlphabets/kkotbrj1ix7yreavqr7f.jpg",
+  "objectImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002368/EnglishAlphabets/thozzg92fqsg3vsh13f1.jpg",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d17282a5254530cc6132ff"
+  },
+  "alphabet": "Z",
+  "signImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002369/EnglishAlphabets/bvt4bvmu72taghrtlmcp.jpg",
+  "objectImage": "https://res.cloudinary.com/dihixxcnt/image/upload/v1725002370/EnglishAlphabets/frir7bq1skoln2gafogc.jpg",
+  "__v": 0
+}]

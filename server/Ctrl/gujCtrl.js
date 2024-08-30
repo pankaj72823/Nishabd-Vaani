@@ -1,5 +1,5 @@
 import wrapAsync from '../Utils/wrapAsync.js'
-import Alphabet from '../Model/Images.js';
+import GujAlphabet from '../Model/GujAlphabet.js';
 
 
 let currentAlphabetIndexGujarati = 0;
@@ -31,7 +31,7 @@ async function generateQuiz(currentAlphabet, alphabetSet) {
 
   const quizOptions = getRandomAlphabets(3);
 
-  const options = await Alphabet.find({ alphabet: { $in: quizOptions } }).select('signImage alphabet');
+  const options = await GujAlphabet.find({ alphabet: { $in: quizOptions } }).select('signImage alphabet');
 
   const quiz = {
     "flag": 'quiz',
@@ -55,7 +55,7 @@ async function generateQuiz(currentAlphabet, alphabetSet) {
 export const alphabetGujarati = wrapAsync(async (req, res) => {
     currentAlphabetIndexGujarati = 0;
     const currentAlphabet = alphabetsGujarati[0];
-    const data = await Alphabet.findOne({ alphabet: currentAlphabet }).select('-_id -__v').lean();
+    const data = await GujAlphabet.findOne({ alphabet: currentAlphabet }).select('-_id -__v').lean();
     data.flag = "Learn"
     return res.json(data);
   });
@@ -64,7 +64,7 @@ export const alphabetGujarati = wrapAsync(async (req, res) => {
 export const alphabetGujaratiNext = wrapAsync(async (req, res) => {
   
   const currentAlphabet = alphabetsGujarati[currentAlphabetIndexGujarati];
-  const data = await Alphabet.findOne({ alphabet: currentAlphabet }).select('-_id -__v').lean();
+  const data = await GujAlphabet.findOne({ alphabet: currentAlphabet }).select('-_id -__v').lean();
   data.flag = "Learn"
 
   if (flagGujarati) {
@@ -89,7 +89,7 @@ export const alphabetGujaratiPrev = wrapAsync(async (req, res) => {
   }
   const currentAlphabet = alphabetsGujarati[currentAlphabetIndexGujarati-2];
 
-  const data = await Alphabet.findOne({ alphabet: currentAlphabet }).select('-_id -__v').lean();
+  const data = await GujAlphabet.findOne({ alphabet: currentAlphabet }).select('-_id -__v').lean();
   data.flag = "Learn"
  
   if(flagGujarati){

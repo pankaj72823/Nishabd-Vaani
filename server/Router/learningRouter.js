@@ -15,6 +15,6 @@ router.get('/alphabetGuj/prev', alphabetGujaratiPrev)
 router.get('/Number', numberSign)
 router.get('/Number/next', NumberNext)
 router.get('/Number/prev', NumberPrev)
-
+// router.get('/alphabetGuj', alphabetGuj)
 
 export default router
