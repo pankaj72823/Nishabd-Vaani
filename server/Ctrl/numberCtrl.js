@@ -1,5 +1,5 @@
 import wrapAsync from '../Utils/wrapAsync.js'
-import NumberImage from '../Model/Number.js';
+import NumberImage from '../Schema/Number.js';
 
 
 let currentNumberIndex = 0;

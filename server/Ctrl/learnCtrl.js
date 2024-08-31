@@ -1,6 +1,6 @@
 import wrapAsync from '../Utils/wrapAsync.js'
-import Alphabet from '../Model/Images.js';
-import NumberImage from '../Model/Number.js';
+import Alphabet from '../Schema/Images.js';
+import NumberImage from '../Schema/Number.js';
 
 let currentAlphabetIndexEng = 0;
 let currentAlphabetIndexGujarati = 0;

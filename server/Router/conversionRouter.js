@@ -1,5 +1,5 @@
 import express from 'express'
-import Gif from '../Model/GIf.js'
+import Gif from '../Schema/GIf.js'
 import wrapAsync from '../Utils/wrapAsync.js'
 
 const router = express.Router()

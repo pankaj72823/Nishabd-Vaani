@@ -1,5 +1,5 @@
 import wrapAsync from '../Utils/wrapAsync.js'
-import GujAlphabet from '../Model/GujAlphabet.js';
+import GujAlphabet from '../Schema/GujAlphabet.js';
 
 
 let currentAlphabetIndexGujarati = 0;

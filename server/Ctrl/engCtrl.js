@@ -1,5 +1,5 @@
 import wrapAsync from '../Utils/wrapAsync.js'
-import EngAlphabet from '../Model/EngAlphabet.js';
+import EngAlphabet from '../Schema/EngAlphabet.js';
 
 let currentAlphabetIndexEng = 0;
 const alphabetsEng = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
