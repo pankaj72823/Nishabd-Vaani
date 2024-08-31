@@ -1,20 +1,82 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nishabdvaani/Screens/Learning/english_alphabet.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
+import 'package:nishabdvaani/Screens/Learning/EnglishAlphabet/english_alphabet.dart';
+import 'package:nishabdvaani/Screens/Learning/GujaratiAlphabet/gujarati_alphabet.dart';
+import '../../Provider/alphabet_provider.dart';
+import '../../Provider/gujarati_alphabet_provider.dart';
 import '../../Widgets/LearningWidgets/letter_card.dart';
 
-
-class Letter extends StatefulWidget {
+class Letter extends ConsumerStatefulWidget {
   const Letter({super.key});
 
   @override
   _LetterState createState() => _LetterState();
 }
 
-class _LetterState extends State<Letter> {
+class _LetterState extends ConsumerState<Letter> {
   int? selectedCardIndex;
 
+  void fetchFirstEnglishAlphabet() async {
+    final response = await http.get(Uri.parse('http://192.168.173.164:5000/learning/alphabetEng'));
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      final alphabet = data['alphabet'];
+      final signImage = data['signImage'];
+      final objectImage = data['objectImage'];
+      final flag = data['flag'];
+      ref.read(alphabetProvider.notifier).setAlphabetData(
+        alphabet: alphabet,
+        signImage: signImage,
+        objectImage: objectImage,
+        flag: flag,
+      );
+
+      // Navigate to the EnglishAlphabet screen
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (ctx) => const EnglishAlphabet(),
+        ),
+      );
+    } else {
+      // Handle error
+      print('Failed to fetch alphabet data');
+    }
+  }
+
+  void fetchFirstGujaratiAlphabet() async {
+    final response = await http.get(Uri.parse('http://192.168.173.164:5000/learning/alphabetGuj'));
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      final alphabet = data['alphabet'];
+      final signImage = data['signImage'];
+      final objectImage = data['objectImage'];
+      final flag = data['flag'];
+      ref.read(GujaratialphabetProvider.notifier).setAlphabetData(
+        alphabet: alphabet,
+        signImage: signImage,
+        objectImage: objectImage,
+        flag: flag,
+      );
+
+      // Navigate to the EnglishAlphabet screen
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (ctx) => const GujaratiAlphabet(),
+        ),
+      );
+    } else {
+      // Handle error
+      print('Failed to fetch alphabet data');
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,15 +144,9 @@ class _LetterState extends State<Letter> {
             onPressed: selectedCardIndex != null
                 ? () {
               if (selectedCardIndex == 0) {
-                Navigator.push(context, MaterialPageRoute(
-                  builder: (ctx) => EnglishAlphabet(),
-                ),
-                );
+                fetchFirstEnglishAlphabet();
               } else if (selectedCardIndex == 1) {
-                // Navigator.push(context, MaterialPageRoute(
-                //   builder: (ctx) =>
-                // ),
-                // );
+                fetchFirstGujaratiAlphabet();
               }
             }
                 : null,
