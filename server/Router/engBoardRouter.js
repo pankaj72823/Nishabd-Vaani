@@ -7,7 +7,7 @@ let pythonOutputBuffer = '';
 let frameProcessing = false;
 
 // Spawn the Python process once
-const process = spawn('python', ['./guj_board_model.py']);
+const process = spawn('python', ['./eng_board_model.py']);
 
 process.stdout.on('data', (data) => {
     pythonOutputBuffer += data.toString();

@@ -12,6 +12,7 @@ import websocketRoutes from './Router/websocketRoutes.js';
 import learningRoute from './Router/learningRouter.js';
 import ConversRoute from './Router/conversionRouter.js';
 import BoardRoute from './Router/BoardRouter.js';
+import EngBoardRoute from './Router/engBoardRouter.js'
 
 // Initialize Express and HTTP server
 const app = express();
@@ -43,7 +44,7 @@ app.use((req, res, next) => {
 app.use('/learning', learningRoute);
 app.use('/conversion', ConversRoute);
 app.use('/gujBoard', BoardRoute)
-app.use('/EngBoard', BoardRoute)
+app.use('/EngBoard', EngBoardRoute)
 app.use('/', websocketRoutes); // This will handle the WebSocket initialization route
 
 // Root route
