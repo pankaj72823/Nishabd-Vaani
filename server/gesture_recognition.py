@@ -1,17 +1,24 @@
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # Suppress all messages (INFO, WARNING, ERROR)
+os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'  # Disable oneDNN optimizations
+import warnings
+import logging
+warnings.filterwarnings('ignore')
+logging.getLogger('tensorflow').setLevel(logging.ERROR)
 import sys
 import json
 import cv2 as cv
 import numpy as np
 import mediapipe as mp
 import pandas as pd
-from model import KeyPointClassifier
+from model.keypoint_classifier import KeyPointClassifier
 from collections import deque
 import copy
 import itertools
-import os
+
 # Load gesture names from CSV file
 script_dir = os.path.dirname(__file__)
-gesture_names_path = os.path.join(script_dir, 'model/keypoint_classifier/keypoint_classifier_label.csv')
+gesture_names_path = os.path.join(script_dir, 'model/keypoint_classifier_label.csv')
 gesture_names_df = pd.read_csv(gesture_names_path, header=None)
 gesture_names = {i: name for i, name in enumerate(gesture_names_df[0])}
 

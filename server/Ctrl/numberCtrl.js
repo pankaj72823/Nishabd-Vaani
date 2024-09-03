@@ -32,6 +32,7 @@ export const NumberPrev = wrapAsync(async(req,res)=>{
   }
   const currentNumber = number[currentNumberIndex-2];
   const data = await NumberImage.findOne({ number: currentNumber }).select('-_id -__v').lean();
+  data.Basket = 'https://res.cloudinary.com/dihixxcnt/image/upload/v1724945980/Pngtree_vector_free_buckle_cartoon_basketball_4581831_1_dvexdu.png'
   currentNumberIndex = (currentNumberIndex - 1) % number.length;
   return res.json(data);
 })

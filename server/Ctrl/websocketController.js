@@ -33,10 +33,6 @@ pythonProcess.stderr.on('data', (data) => {
 });
 
 export const startWebSocket = (req, res) => {
-  if (isWebSocketActive()) {
-    res.status(400).send('WebSocket is already active.');
-    return;
-  }
 
   const io = getIOInstance(req.app.get('server'));
 
