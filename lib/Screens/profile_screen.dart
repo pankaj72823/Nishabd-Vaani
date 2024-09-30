@@ -70,7 +70,7 @@ class ProfileScreen extends StatelessWidget {
                       style: GoogleFonts.openSans(fontSize: 16),
                     ),
                     Text(
-                      'Location: Surat',
+                      'Location: Ahmedabad',
                       style: GoogleFonts.openSans(fontSize: 16),
                     ),
                   ],
