@@ -1,0 +1,7 @@
+bidict==0.23.1
+mediapipe==0.10.14
+numpy==1.26.0
+opencv-contrib-python==4.10.0.84
+opencv-python==4.10.0.84
+pandas==2.2.2
+tensorflow==2.17.0

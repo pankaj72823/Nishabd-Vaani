@@ -64,6 +64,10 @@ app.use((err, req, res, next) => {
   });
 });
 
+app.use((req, res, next) => {
+  res.status(404).json({ title: '404', message: 'Page Not Found' });
+});
+
 // Start the server
 server.listen(PORT, () => {
   console.log(`Click to Connect: http://localhost:${PORT}/`);

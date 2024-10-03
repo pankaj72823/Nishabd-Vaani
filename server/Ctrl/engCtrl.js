@@ -52,7 +52,7 @@ async function generateQuiz(currentAlphabet, alphabetSet) {
 
 // English alphabet route
 export const alphabetEng = wrapAsync(async (req, res) => {
-    currentAlphabetIndexEng = 0;
+  currentAlphabetIndexEng = 0;
   const currentAlphabet = alphabetsEng[0];
   const data = await EngAlphabet.findOne({ alphabet: currentAlphabet }).select('-_id -__v').lean();
   data.flag = "Learn"
