@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nishabdvaani/Screens/WhiteBoard/drawing_board.dart';
 import 'package:nishabdvaani/Widgets/PracticeQuiz/quiz_card.dart';
 class PracticeQuiz extends StatefulWidget {
   const PracticeQuiz({super.key});
@@ -86,10 +85,10 @@ class _PracticeQuizState extends State<PracticeQuiz> {
               ElevatedButton(
                 onPressed: () {
                   if(_selectedQuiz == 'Alphabet Quiz'){
-                    Navigator.push(context, MaterialPageRoute(
-                    builder: (ctx) => DrawingBoard(),
-                  ),
-                  );
+                  //   Navigator.push(context, MaterialPageRoute(
+                  //   builder: (ctx) => DrawingBoard(),
+                  // ),
+                  // );
                   }
                 },
                 child: Text(
