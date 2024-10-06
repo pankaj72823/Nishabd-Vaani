@@ -1,0 +1,7 @@
+global:
+  scrape_interval: 4s  # Scrape metrics every 4 seconds
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['app:5000']  # Your app container is named 'app', Prometheus scrapes it on port 5000

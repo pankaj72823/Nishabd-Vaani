@@ -18,6 +18,7 @@ process.stdout.on('data', (data) => {
         pythonOutputBuffer = ''; // Clear the buffer for the next message
         frameProcessing = false; // Reset the flag, allowing new frames to be processed
     } catch (error) {
+        console.log(error)
         // If parsing fails, keep accumulating data until a full JSON string is received
     }
 });
@@ -27,10 +28,6 @@ process.stderr.on('data', (data) => {
 });
 
 router.post('/', (req, res) => {
-    // if (frameProcessing) {
-    //     return res.status(429).json({ error: 'Frame is already being processed' });
-    // }
-
     const { pixels } = req.body;
 
     if (!pixels) {
