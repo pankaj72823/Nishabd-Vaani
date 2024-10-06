@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nishabdvaani/Screens/WhiteBoard/drawing_board.dart';
 import 'package:nishabdvaani/Widgets/PracticeQuiz/quiz_card.dart';
-
 class PracticeQuiz extends StatefulWidget {
   const PracticeQuiz({super.key});
 
@@ -32,7 +32,7 @@ class _PracticeQuizState extends State<PracticeQuiz> {
               style: GoogleFonts.openSans(fontSize: 18, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Expanded(
               child: GridView.count(
                 crossAxisCount: 2,
@@ -60,7 +60,7 @@ class _PracticeQuizState extends State<PracticeQuiz> {
                     },
                   ),
                   QuizCard(
-                    title: 'Alphabet Quiz',
+                    title: 'Alphabet Practice',
                     imagePath: 'assets/Home_Screen/study.png',
                     isSelected: _selectedQuiz == 'Alphabet Quiz',
                     onTap: () {
@@ -84,7 +84,14 @@ class _PracticeQuizState extends State<PracticeQuiz> {
             ),
             if (_selectedQuiz != null)
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  if(_selectedQuiz == 'Alphabet Quiz'){
+                    Navigator.push(context, MaterialPageRoute(
+                    builder: (ctx) => DrawingBoard(),
+                  ),
+                  );
+                  }
+                },
                 child: Text(
                   'Continue',
                   style: GoogleFonts.openSans(fontSize: 28, color: Colors.black, fontWeight: FontWeight.bold),

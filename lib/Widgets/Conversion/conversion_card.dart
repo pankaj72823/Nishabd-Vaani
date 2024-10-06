@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nishabdvaani/Screens/sign_to_text.dart';
 import 'package:nishabdvaani/Screens/text_to_sign.dart';
@@ -19,7 +20,7 @@ class ConversionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
+      height: 250,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -34,10 +35,10 @@ class ConversionCard extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Image.asset(imagePath, height: 100,),
-          SizedBox(height: 16.0),
+          Image.asset(imagePath, height:  90,),
+          SizedBox(height: 8.0),
           Text(
             title,
             style: GoogleFonts.openSans(
@@ -52,7 +53,8 @@ class ConversionCard extends StatelessWidget {
             child: Text(
               description,
               style: GoogleFonts.openSans(
-                fontSize: 16,
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
                 color: Colors.black,
               ),
             ),
@@ -60,7 +62,7 @@ class ConversionCard extends StatelessWidget {
           const SizedBox(height: 16.0),
           ElevatedButton(
             onPressed: () {
-
+              HapticFeedback.heavyImpact();
               if(title== 'Sign to Text') {
                 Navigator.push(context, MaterialPageRoute(
                     builder: (ctx) => SignToText(),
@@ -77,7 +79,7 @@ class ConversionCard extends StatelessWidget {
             child: Text(
               'Start',
               style: GoogleFonts.openSans(
-                fontSize: 20,
+                fontSize: 16,
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
               ),
@@ -91,11 +93,11 @@ class ConversionCard extends StatelessWidget {
                   width: 2,
                 ),
               ),
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10 ), // Proper spacing
+              padding: EdgeInsets.symmetric(vertical: 2, horizontal: 10 ), // Proper spacing
               textStyle: TextStyle(fontSize: 16),
               elevation: 8, // Adds some shadow to elevate the button
             ).copyWith(
-              side: WidgetStateProperty.resolveWith<BorderSide>((Set<MaterialState> states) {
+              side: WidgetStateProperty.resolveWith<BorderSide>((Set<WidgetState> states) {
                 if (states.contains(WidgetState.pressed)) {
                   return BorderSide(
                     color: Colors.orangeAccent,

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:nishabdvaani/Screens/Learning/learning_screen.dart';
 import 'package:nishabdvaani/Screens/conversion.dart';
 import 'package:nishabdvaani/Screens/home_screen.dart';
 import 'package:nishabdvaani/Screens/practice.dart';
+import 'package:nishabdvaani/Screens/profile_screen.dart';
 
 class TabsScreen extends StatefulWidget {
   @override
@@ -13,12 +14,13 @@ class TabsScreen extends StatefulWidget {
 class _TabsScreenState extends State<TabsScreen> {
   int _selectedPageIndex = 2; // Start with HomeScreen selected
 
-  final List<Widget> _pages = const [
-    LearningScreen(),
-    Conversion(),
-    HomeScreen(),
-    Practice(),
-    Center(child: Text('Profile Screen')),
+  final List<Widget> _pages = [
+    const LearningScreen(),
+    const Conversion(),
+    const HomeScreen(),
+    const Practice(),
+    // EnglishBoard(),
+   const ProfileScreen(),
   ];
 
   void _selectPage(int index) {

@@ -98,14 +98,14 @@ class GujaratiAlphabet extends ConsumerWidget {
                   IconButton(
                     icon: const Icon(Icons.arrow_back_ios, size: 50),
                     onPressed: () {
-                      ref.read(GujaratialphabetProvider.notifier).fetchPreviousAlphabet();
+                      ref.read(GujaratialphabetProvider.notifier).fetchPreviousGujaratiAlphabet();
                     },
                     color: Colors.black,
                   ),
                   IconButton(
                     icon: const Icon(Icons.arrow_forward_ios, size: 50),
                     onPressed: () {
-                      ref.read(GujaratialphabetProvider.notifier).fetchNextAlphabet();
+                      ref.read(GujaratialphabetProvider.notifier).fetchNextGujaratiAlphabet();
                     },
                     color: Colors.black,
                   ),

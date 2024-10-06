@@ -2,9 +2,10 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nishabdvaani/Provider/ip_provider.dart';
 
 final alphabetProvider = StateNotifierProvider<AlphabetNotifier, AlphabetState>((ref) {
-  return AlphabetNotifier();
+  return AlphabetNotifier(ref);
 });
 
 class AlphabetState {
@@ -37,7 +38,8 @@ class AlphabetState {
 }
 
 class AlphabetNotifier extends StateNotifier<AlphabetState> {
-  AlphabetNotifier() : super(AlphabetState.initial());
+  final Ref ref;
+  AlphabetNotifier(this.ref) : super(AlphabetState.initial());
 
   void setAlphabetData({
     required String alphabet,
@@ -54,9 +56,10 @@ class AlphabetNotifier extends StateNotifier<AlphabetState> {
   }
 
   Future<void> fetchNextAlphabet() async {
+    final ipAddress = ref.watch(ipAddressProvider);
     try {
       final response = await http.get(
-          Uri.parse('http://192.168.173.164:5000/learning/alphabetEng/next'));
+          Uri.parse('http://$ipAddress:5000/learning/alphabetEng/next'));
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
@@ -94,9 +97,10 @@ class AlphabetNotifier extends StateNotifier<AlphabetState> {
   }
 
   Future<void> fetchPreviousAlphabet() async {
+    final ipAddress = ref.watch(ipAddressProvider);
     try {
       final response = await http.get(
-          Uri.parse('http://192.168.173.164:5000/learning/alphabetEng/prev'));
+          Uri.parse('http://$ipAddress:5000/learning/alphabetEng/prev'));
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);

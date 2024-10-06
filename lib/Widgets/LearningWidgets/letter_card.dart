@@ -44,10 +44,10 @@ class LetterCard extends StatelessWidget {
             children: [
               Image.asset(
                 imagePath,
-                width: 100,
-                height: 100,
+                width: 80,
+                height: 80,
               ),
-              const SizedBox(width: 20),
+              const SizedBox(width: 10),
               Text(
                 title,
                 style: GoogleFonts.openSans(

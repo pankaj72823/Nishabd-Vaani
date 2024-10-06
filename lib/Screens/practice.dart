@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nishabdvaani/Screens/classroom_test.dart';
 import 'package:nishabdvaani/Screens/practice_quiz.dart';
@@ -49,7 +50,7 @@ class _PracticeState extends State<Practice> {
             child: Column(
               children: [
                 PracticeCard(
-                  title: "Practice Quiz",
+                  title: "Writing Practice ",
                   imagePath: "assets/Practice_Screen/quiz.gif",
                   isSelected: selectedCardIndex == 0,
                   onTap: () => setState(() {
@@ -76,10 +77,11 @@ class _PracticeState extends State<Practice> {
               ],
             ),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 24),
           ElevatedButton(
             onPressed: selectedCardIndex != null
                 ? () {
+                  HapticFeedback.vibrate();
               if (selectedCardIndex == 0) {
                   Navigator.push(context, MaterialPageRoute(
                     builder: (ctx) => PracticeQuiz(),

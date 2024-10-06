@@ -19,7 +19,7 @@ class IncorrectEnglish extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'Wrong',
               style: TextStyle(
                 fontSize: 28,
@@ -27,19 +27,19 @@ class IncorrectEnglish extends ConsumerWidget {
                 color: Colors.red,
               ),
             ),
-            SizedBox(height: 20),
-            Image.asset('assets/Learning/incorrect.jpg'), // Add your image here
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            Image.asset('assets/Learning/incorrect.png'), // Add your image here
+            const SizedBox(height: 20),
+            const Text(
               'Oo wrong answer',
               style: TextStyle(fontSize: 18),
             ),
-            Text(
+            const Text(
               'Correct answer is:',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             Image.network(answer),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -50,20 +50,20 @@ class IncorrectEnglish extends ConsumerWidget {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => EnglishAlphabet(),
+                      builder: (context) => const EnglishAlphabet(),
                     ),
                   );
                 });
                   },
-                  child: Text('Next', style: GoogleFonts.openSans(color: Colors.white,fontSize: 20, fontWeight: FontWeight.bold,),),
                   style: ElevatedButton.styleFrom(
                   backgroundColor:Colors.red,
-                  textStyle: TextStyle(fontSize: 16),
-                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 60),
+                  textStyle: const TextStyle(fontSize: 16),
+                  padding: const  EdgeInsets.symmetric(vertical: 15, horizontal: 60),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
+                  child: Text('Next', style: GoogleFonts.openSans(color: Colors.white,fontSize: 20, fontWeight: FontWeight.bold,),),
                 ),
               ],
             ),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'package:nishabdvaani/Provider/ip_provider.dart';
 import 'dart:convert';
 
 import 'package:nishabdvaani/Screens/Learning/EnglishAlphabet/english_alphabet.dart';
@@ -21,7 +23,8 @@ class _LetterState extends ConsumerState<Letter> {
   int? selectedCardIndex;
 
   void fetchFirstEnglishAlphabet() async {
-    final response = await http.get(Uri.parse('http://192.168.173.164:5000/learning/alphabetEng'));
+    final ipAddress = ref.watch(ipAddressProvider);
+    final response = await http.get(Uri.parse('http://$ipAddress:5000/learning/alphabetEng'));
     print(response.statusCode);
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
@@ -35,7 +38,7 @@ class _LetterState extends ConsumerState<Letter> {
         objectImage: objectImage,
         flag: flag,
       );
-
+      HapticFeedback.heavyImpact();
       // Navigate to the EnglishAlphabet screen
       Navigator.pushReplacement(
         context,
@@ -50,7 +53,8 @@ class _LetterState extends ConsumerState<Letter> {
   }
 
   void fetchFirstGujaratiAlphabet() async {
-    final response = await http.get(Uri.parse('http://192.168.173.164:5000/learning/alphabetGuj'));
+    final ipAddress = ref.watch(ipAddressProvider);
+    final response = await http.get(Uri.parse('http://$ipAddress:5000/learning/alphabetGuj'));
     print(response.statusCode);
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
@@ -58,13 +62,13 @@ class _LetterState extends ConsumerState<Letter> {
       final signImage = data['signImage'];
       final objectImage = data['objectImage'];
       final flag = data['flag'];
-      ref.read(GujaratialphabetProvider.notifier).setAlphabetData(
+      ref.read(GujaratialphabetProvider.notifier).setGujaratiAlphabetData(
         alphabet: alphabet,
         signImage: signImage,
         objectImage: objectImage,
         flag: flag,
       );
-
+      HapticFeedback.heavyImpact();
       // Navigate to the EnglishAlphabet screen
       Navigator.pushReplacement(
         context,

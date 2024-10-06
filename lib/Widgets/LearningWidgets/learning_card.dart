@@ -37,10 +37,10 @@ class LearningCard extends StatelessWidget {
             children: [
               Image.asset(
                 imagePath,
-                width: 60,
-                height: 60,
+                width: 80,
+                height: 80,
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Text(
                 title,
                 style: GoogleFonts.openSans(fontSize: 24, fontWeight: FontWeight.bold),

@@ -78,7 +78,7 @@ class EnglishAlphabet extends ConsumerWidget {
               Image.network(
                 alphabetState.signImage,
                 width: 200,
-                height: 100,
+                height: 200,
               ),
               Text(
                 alphabetState.alphabet,

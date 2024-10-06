@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nishabdvaani/Screens/Learning/EnglishAlphabet/correct_english.dart';
-import 'package:nishabdvaani/Screens/Learning/EnglishAlphabet/incorrect_english.dart';
+import 'package:nishabdvaani/Screens/Learning/GujaratiAlphabet/correct_gujarati.dart';
+import 'package:nishabdvaani/Screens/Learning/GujaratiAlphabet/incorrect_gujarati.dart';
+// import 'package:nishabdvaani/Screens/Learning/GujaratiAlphabet/correct_gujarati.dart';
 
 class QuestionGujarati extends StatefulWidget {
   final String question;
@@ -26,7 +27,7 @@ class _QuestionGujaratiState extends State<QuestionGujarati> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => CorrectEnglish(
+          builder: (context) => CorrectGujarati(
             selectedOption: _selectedOption!,
             answer: widget.answer,
           ),
@@ -36,7 +37,7 @@ class _QuestionGujaratiState extends State<QuestionGujarati> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => IncorrectEnglish(
+          builder: (context) => IncorrectGujarati(
             selectedOption: _selectedOption!,
             answer: widget.answer,
           ),
@@ -139,66 +140,3 @@ class _QuestionGujaratiState extends State<QuestionGujarati> {
 
 
 
-
-
-// import 'package:flutter/material.dart';
-
-// class QuestionEnglish extends StatelessWidget {
-//   final String question;
-//   final List<String> options;
-//   final String answer;
-
-//   QuestionEnglish({
-//     required this.question,
-//     required this.options,
-//     required this.answer,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: Colors.white,
-//       body: Padding(
-//         padding: const EdgeInsets.all(16.0),
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             Text(
-//               'Quiz',
-//               style: TextStyle(
-//                 fontSize: 24,
-//                 fontWeight: FontWeight.bold,
-//                 color: Colors.purple,
-//               ),
-//             ),
-//             SizedBox(height: 20),
-//             Text(question), // Add your image here
-//             SizedBox(height: 20),
-//             Text(
-//               'This is a sign of......🤔',
-//               style: TextStyle(fontSize: 18),
-//             ),
-//             SizedBox(height: 20),
-//             for (var option in options)
-//               Padding(
-//                 padding: const EdgeInsets.symmetric(vertical: 8.0),
-//                 child: ElevatedButton(
-//                   onPressed: () {
-//                     // Add your logic for correct/incorrect answer
-//                   },
-//                   child: Image.network(option),
-//                   style: ElevatedButton.styleFrom(
-//                     backgroundColor: Colors.purple,
-//                     padding: EdgeInsets.symmetric(vertical: 15),
-//                     shape: RoundedRectangleBorder(
-//                       borderRadius: BorderRadius.circular(20),
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

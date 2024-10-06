@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nishabdvaani/Screens/Learning/Maths/Numbers/maths_option.dart';
 import 'package:nishabdvaani/Screens/Learning/letter.dart';
 import 'package:nishabdvaani/Widgets/LearningWidgets/learning_card.dart';
 
@@ -42,7 +44,7 @@ class _LearningScreenState extends State<LearningScreen> {
                 children: [
                   LearningCard(
                     title: 'Alphabets',
-                    imagePath: 'assets/Home_Screen/study.png',
+                    imagePath: 'assets/Tables/alphabets.jpg',
                     isSelected: _selectedModule == 'Alphabets',
                     onTap: () {
                       setState(() {
@@ -52,7 +54,7 @@ class _LearningScreenState extends State<LearningScreen> {
                   ),
                   LearningCard(
                     title: 'Maths',
-                    imagePath: 'assets/Home_Screen/study.png',
+                    imagePath: 'assets/Tables/number.jpg',
                     isSelected: _selectedModule  == 'Maths',
                     onTap: () {
                       setState(() {
@@ -62,7 +64,7 @@ class _LearningScreenState extends State<LearningScreen> {
                   ),
                   LearningCard(
                     title: 'Science',
-                    imagePath: 'assets/Home_Screen/study.png',
+                    imagePath: 'assets/Tables/science.jpg',
                     isSelected: _selectedModule  == 'Science',
                     onTap: () {
                       setState(() {
@@ -72,7 +74,7 @@ class _LearningScreenState extends State<LearningScreen> {
                   ),
                   LearningCard(
                     title: 'Vocabulary',
-                    imagePath: 'assets/Home_Screen/study.png',
+                    imagePath: 'assets/Tables/vocabulary.png',
                     isSelected: _selectedModule  == 'Vocabulary',
                     onTap: () {
                       setState(() {
@@ -86,13 +88,20 @@ class _LearningScreenState extends State<LearningScreen> {
              ElevatedButton(
                   onPressed: _selectedModule != null
                     ? () {
-
+                       HapticFeedback.vibrate();
                     if(_selectedModule=='Alphabets'){
                       Navigator.push(context, MaterialPageRoute(
                         builder: (ctx) => const Letter(),
                       ),
                       );
                     }
+                    if(_selectedModule=='Maths'){
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (ctx) => const MathsOption(),
+                      ),
+                      );
+                    }
+
 
                   }
                 : null,

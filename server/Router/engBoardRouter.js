@@ -27,12 +27,13 @@ process.stderr.on('data', (data) => {
 });
 
 router.post('/', (req, res) => {
-    if (frameProcessing) {
-        return res.status(429).json({ error: 'Frame is already being processed' });
-    }
+    // if (frameProcessing) {
+    //     return res.status(429).json({ error: 'Frame is already being processed' });
+    // }
 
     const { pixels } = req.body;
 
+    console.log(pixels);
     if (!pixels) {
         return res.status(400).json({ error: 'Pixels data is required' });
     }
