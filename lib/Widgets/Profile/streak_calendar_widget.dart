@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class StreakCalendarWidget extends StatelessWidget {
-  final List<bool> streakData = List.generate(30, (index) => index % 2 == 0);
+class StreakCalendarWidget extends StatefulWidget {
+
+
 
   StreakCalendarWidget({super.key});
+
+  @override
+  State<StreakCalendarWidget> createState() => _StreakCalendarWidgetState();
+}
+
+class _StreakCalendarWidgetState extends State<StreakCalendarWidget> {
+
+
+  final List<bool> streakData = List.generate(30, (index) => index % 2 == 0);
 
   @override
   Widget build(BuildContext context) {
