@@ -15,6 +15,7 @@ from model.keypoint_classifier import KeyPointClassifier
 from collections import deque
 import copy
 import itertools
+import base64
 
 # Load gesture names from CSV file
 script_dir = os.path.dirname(__file__)
@@ -85,33 +86,26 @@ def image_to_bytes(image_path):
         image_bytes = image_file.read()
     return image_bytes
 
-if __name__ == "__main__":
-    # Fixed image path
-    fixed_image_path = os.path.join(script_dir, './Ctrl/temp_image.jpeg')
 
+if __name__ == "__main__":
     while True:
         # Listen for input from the Express route
-        signal = sys.stdin.readline().strip()
+        base64_string = sys.stdin.readline().strip()
+        if base64_string.startswith('data:image/jpeg;base64,'):
+            base64_string = base64_string.replace('data:image/jpeg;base64,', '')
 
-        # If the input signal is 'true', process the image
-        if signal.lower() == 'true':
-            try:
-                # Convert the image to byte code
-                image_bytes = image_to_bytes(fixed_image_path)
+        try:
+            # Convert the image to byte code
+            image_bytes = base64.b64decode(base64_string)
 
-                # Call the predict function with the image bytes
-                output = predict(image_bytes)
+            # Call the predict function with the image bytes
+            output = predict(image_bytes)
 
-                # Send the output back to the Express route
-                print(json.dumps(output))
-                sys.stdout.flush()
-
-            except Exception as e:
-                # Handle any potential errors
-                print(json.dumps({'error': str(e)}))
-                sys.stdout.flush()
-        else:
-            # Optional: Handle cases where the signal is not 'true'
-            print(json.dumps({'error': 'Invalid signal received'}))
+            # Send the output back to the Express route
+            print(json.dumps(output))
             sys.stdout.flush()
 
+        except Exception as e:
+            # Handle any potential errors
+            print(json.dumps({'error': str(e)}))
+            sys.stdout.flush()

@@ -10,8 +10,7 @@ function capitalize(word){
 
 router.post('/', wrapAsync(async(req,res)=>{
     const word = capitalize(req.body.word);
-
-    const gif = await Gif.findOne({sign_name : word}).select('-_id -__v');
+    const gif = await Gif.findOne({sign_name: { $regex: new RegExp(`^${word}$`, 'i') } }).select('-_id -__v');
     if(!gif){
         const error = new Error("Gif Not Found");
         error.status = 400; // Set a custom status code

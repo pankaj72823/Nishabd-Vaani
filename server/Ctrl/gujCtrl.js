@@ -1,11 +1,8 @@
-import wrapAsync from '../Utils/wrapAsync.js'
+import wrapAsync from '../Utils/wrapAsync.js';
 import GujAlphabet from '../Schema/GujAlphabet.js';
 
-
-let currentAlphabetIndexGujarati = 0;
-// const alphabetsGujarati = ['અ', 'આ', 'ઇ', 'ઈ', 'ઉ', 'ઊ', 'ઋ', 'એ', 'ઐ', 'ઓ', 'ઔ', 'ક', 'ખ', 'ગ', 'ઘ', 'ચ', 'છ', 'જ', 'ઝ', 'ટ', 'ઠ', 'ડ', 'ઢ', 'ત', 'થ', 'દ', 'ધ', 'ન', 'પ', 'ફ', 'બ', 'ભ', 'મ', 'ય', 'ર', 'લ', 'વ', 'શ', 'ષ', 'સ', 'હ']; // Add more as needed
-const alphabetsGujarati = ['ક', 'ખ', 'ગ', 'ઘ', 'ચ', 'છ', 'જ', 'ઝ', 'ટ', 'ઠ', 'ડ', 'ઢ','ણ', 'ત', 'થ', 'દ', 'ધ', 'ન', 'પ', 'ફ', 'બ', 'ભ', 'મ', 'ય', 'ર', 'લ', 'વ', 'શ', 'ષ', 'સ', 'હ','ળ','ક્ષ']; // Add more as needed
-let flagGujarati = false;
+// Gujarati alphabet set
+const alphabetsGujarati = ['ક', 'ખ', 'ગ', 'ઘ', 'ચ', 'છ', 'જ', 'ઝ', 'ટ', 'ઠ', 'ડ', 'ઢ', 'ણ', 'ત', 'થ', 'દ', 'ધ', 'ન', 'પ', 'ફ', 'બ', 'ભ', 'મ', 'ય', 'ર', 'લ', 'વ', 'શ', 'ષ', 'સ', 'હ', 'ળ', 'ક્ષ']; // Add more as needed
 
 // Utility function to generate quiz
 async function generateQuiz(currentAlphabet, alphabetSet) {
@@ -44,66 +41,81 @@ async function generateQuiz(currentAlphabet, alphabetSet) {
       }
     ],
     "answer": options[0].signImage
-  }
+  };
   return quiz;
 }
 
-
-
-// Gujarati alphabet route
-
+// Gujarati alphabet route (starting alphabet)
 export const alphabetGujarati = wrapAsync(async (req, res) => {
-    currentAlphabetIndexGujarati = 0;
-    const currentAlphabet = alphabetsGujarati[0];
-    const data = await GujAlphabet.findOne({ alphabet: currentAlphabet }).select('-_id -__v').lean();
-    data.flag = "Learn"
-    currentAlphabetIndexGujarati = (currentAlphabetIndexGujarati + 1) % alphabetsGujarati.length;
-    return res.json(data);
-  });
 
-
-export const alphabetGujaratiNext = wrapAsync(async (req, res) => {
+    req.session.currentAlphabetIndexGujarati = 0;
+    req.session.flagGujarati = false;
   
-  const currentAlphabet = alphabetsGujarati[currentAlphabetIndexGujarati];
-  const data = await GujAlphabet.findOne({ alphabet: currentAlphabet }).select('-_id -__v').lean();
-  data.flag = "Learn"
 
-  if (flagGujarati) {
-    currentAlphabetIndexGujarati = (currentAlphabetIndexGujarati + 1) % alphabetsGujarati.length;
-    flagGujarati = false;
+    const currentAlphabet = alphabetsGujarati[req.session.currentAlphabetIndexGujarati];
+    const data = await GujAlphabet.findOne({ alphabet: currentAlphabet }).select('-_id -__v').lean();
+    data.flag = "Learn";
+
+    // Move to the next alphabet
+    req.session.currentAlphabetIndexGujarati = (req.session.currentAlphabetIndexGujarati + 1) % alphabetsGujarati.length;
+
     return res.json(data);
-  } else if (currentAlphabetIndexGujarati !== 0 && currentAlphabetIndexGujarati % 5 === 0) {
-    const quiz = await generateQuiz(currentAlphabet, alphabetsGujarati);
-    flagGujarati = true;
-    return res.json(quiz);
-  } else {
-    currentAlphabetIndexGujarati = (currentAlphabetIndexGujarati + 1) % alphabetsGujarati.length;
-    return res.json(data);
-  }
 });
 
+// Route for next alphabet
+export const alphabetGujaratiNext = wrapAsync(async (req, res) => {
+    // Ensure session is initialized
+    if (!req.session.currentAlphabetIndexGujarati) {
+        req.session.currentAlphabetIndexGujarati = 0;
+        req.session.flagGujarati = false;
+    }
+
+    const currentAlphabet = alphabetsGujarati[req.session.currentAlphabetIndexGujarati];
+    const data = await GujAlphabet.findOne({ alphabet: currentAlphabet }).select('-_id -__v').lean();
+    data.flag = "Learn";
+
+    if (req.session.flagGujarati) {
+        // Move to the next alphabet after the quiz
+        req.session.currentAlphabetIndexGujarati = (req.session.currentAlphabetIndexGujarati + 1) % alphabetsGujarati.length;
+        req.session.flagGujarati = false;
+        return res.json(data);
+    } else if (req.session.currentAlphabetIndexGujarati !== 0 && req.session.currentAlphabetIndexGujarati % 5 === 0) {
+        // Every 5th alphabet triggers a quiz
+        const quiz = await generateQuiz(currentAlphabet, alphabetsGujarati);
+        req.session.flagGujarati = true;
+        return res.json(quiz);
+    } else {
+        // Proceed to the next alphabet
+        req.session.currentAlphabetIndexGujarati = (req.session.currentAlphabetIndexGujarati + 1) % alphabetsGujarati.length;
+        return res.json(data);
+    }
+});
+
+// Route for previous alphabet
 export const alphabetGujaratiPrev = wrapAsync(async (req, res) => {
-  if(currentAlphabetIndexGujarati-2<0){
-    const error = new Error("Start Learning");
-    error.status = 400; // Set a custom status code
-    throw error;
-  }
-  const currentAlphabet = alphabetsGujarati[currentAlphabetIndexGujarati-2];
+    if (!req.session.currentAlphabetIndexGujarati || req.session.currentAlphabetIndexGujarati - 2 < 0) {
+        const error = new Error("Start Learning");
+        error.status = 400; // Set a custom status code
+        throw error;
+    }
 
-  const data = await GujAlphabet.findOne({ alphabet: currentAlphabet }).select('-_id -__v').lean();
-  data.flag = "Learn"
- 
-  if(flagGujarati){
-    currentAlphabetIndexGujarati = (currentAlphabetIndexGujarati - 1) % alphabetsGujarati.length;
-    flagGujarati=false
-    return res.json(data);
-  }else if(currentAlphabetIndexGujarati!=0 && currentAlphabetIndexGujarati%5==0){
-    const quiz = await generateQuiz(currentAlphabet,alphabetsGujarati);
-    flagGujarati=true
-    return res.json(quiz)
-  }else{
-    currentAlphabetIndexGujarati = (currentAlphabetIndexGujarati - 1) % alphabetsGujarati.length;
-    return res.json(data);
-  }
+    const currentAlphabet = alphabetsGujarati[req.session.currentAlphabetIndexGujarati - 2];
+    const data = await GujAlphabet.findOne({ alphabet: currentAlphabet }).select('-_id -__v').lean();
+    data.flag = "Learn";
+
+    if (req.session.flagGujarati) {
+        // Move back in the sequence after a quiz
+        req.session.currentAlphabetIndexGujarati = (req.session.currentAlphabetIndexGujarati - 1) % alphabetsGujarati.length;
+        req.session.flagGujarati = false;
+        return res.json(data);
+    } else if (req.session.currentAlphabetIndexGujarati !== 0 && req.session.currentAlphabetIndexGujarati % 5 === 0) {
+        // Generate a quiz for every 5th alphabet
+        const quiz = await generateQuiz(currentAlphabet, alphabetsGujarati);
+        req.session.flagGujarati = true;
+        return res.json(quiz);
+    } else {
+        // Move back in the sequence
+        req.session.currentAlphabetIndexGujarati = (req.session.currentAlphabetIndexGujarati - 1) % alphabetsGujarati.length;
+        return res.json(data);
+    }
 });
-
