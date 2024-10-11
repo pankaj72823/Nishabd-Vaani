@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class StreakCalendarWidget extends StatefulWidget {
-
-
-
-  StreakCalendarWidget({super.key});
+  const StreakCalendarWidget({super.key});
 
   @override
   State<StreakCalendarWidget> createState() => _StreakCalendarWidgetState();

@@ -84,12 +84,12 @@ class _PracticeState extends State<Practice> {
                   HapticFeedback.vibrate();
               if (selectedCardIndex == 0) {
                   Navigator.push(context, MaterialPageRoute(
-                    builder: (ctx) => PracticeQuiz(),
+                    builder: (ctx) => const PracticeQuiz(),
                   ),
                   );
               } else if (selectedCardIndex == 1) {
                 Navigator.push(context, MaterialPageRoute(
-                  builder: (ctx) => ClassroomTest(),
+                  builder: (ctx) => const ClassroomTest(),
                 ),
                 );
               }
