@@ -24,7 +24,7 @@ class PracticeCard extends StatelessWidget {
       highlightColor: Colors.lightBlueAccent.withOpacity(0.9),
       borderRadius: BorderRadius.circular(10),
       child: Container(
-        height: 250,
+        height: 200,
         decoration: BoxDecoration(
           color: isSelected ? Colors.lightBlue[100] : Colors.white,
           borderRadius: BorderRadius.circular(10),
@@ -43,14 +43,14 @@ class PracticeCard extends StatelessWidget {
             children: [
               Image.asset(
                 imagePath,
-                width: 100,
+                width: 80,
                 height: 100,
               ),
-              const SizedBox(width: 20),
+              const SizedBox(width: 10),
               Text(
                 title,
                 style: GoogleFonts.openSans(
-                  fontSize: 28,
+                  fontSize: 24,
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),

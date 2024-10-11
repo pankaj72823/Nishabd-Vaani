@@ -2,9 +2,10 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nishabdvaani/Provider/ip_provider.dart';
 
 final GujaratialphabetProvider = StateNotifierProvider<GujaratiAlphabetNotifier, GujaratiAlphabetState>((ref) {
-  return GujaratiAlphabetNotifier();
+  return GujaratiAlphabetNotifier(ref);
 });
 
 class GujaratiAlphabetState {
@@ -37,9 +38,10 @@ class GujaratiAlphabetState {
 }
 
 class GujaratiAlphabetNotifier extends StateNotifier<GujaratiAlphabetState> {
-  GujaratiAlphabetNotifier() : super(GujaratiAlphabetState.initial());
+  final Ref ref;
+  GujaratiAlphabetNotifier(this.ref) : super(GujaratiAlphabetState.initial());
 
-  void setAlphabetData({
+  void setGujaratiAlphabetData({
     required String alphabet,
     required String signImage,
     required String objectImage,
@@ -53,10 +55,11 @@ class GujaratiAlphabetNotifier extends StateNotifier<GujaratiAlphabetState> {
     );
   }
 
-  Future<void> fetchNextAlphabet() async {
+  Future<void> fetchNextGujaratiAlphabet() async {
+    final ipAddress = ref.watch(ipAddressProvider);
     try {
       final response = await http.get(
-          Uri.parse('http://192.168.173.164:5000/learning/alphabetGuj/next'));
+          Uri.parse('http://$ipAddress:5000/learning/alphabetGuj/next'));
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
@@ -92,10 +95,11 @@ class GujaratiAlphabetNotifier extends StateNotifier<GujaratiAlphabetState> {
     }
   }
 
-  Future<void> fetchPreviousAlphabet() async {
+  Future<void> fetchPreviousGujaratiAlphabet() async {
+    final ipAddress = ref.watch(ipAddressProvider);
     try {
       final response = await http.get(
-          Uri.parse('http://192.168.173.164:5000/learning/alphabetGuj/prev'));
+          Uri.parse('http://$ipAddress:5000/learning/alphabetGuj/prev'));
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);

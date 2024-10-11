@@ -1,49 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
-import 'package:nishabdvaani/Provider/ip_provider.dart';
 import 'dart:convert';
+import 'package:nishabdvaani/Provider/numbers_provider.dart';
+import 'package:nishabdvaani/Screens/Learning/Maths/Arithmetic/arithmetic_operations.dart';
+import 'package:nishabdvaani/Screens/Learning/Maths/Numbers/numbers.dart';
 
-import 'package:nishabdvaani/Screens/Learning/EnglishAlphabet/english_alphabet.dart';
-import 'package:nishabdvaani/Screens/Learning/GujaratiAlphabet/gujarati_alphabet.dart';
-import '../../Provider/alphabet_provider.dart';
-import '../../Provider/gujarati_alphabet_provider.dart';
-import '../../Widgets/LearningWidgets/letter_card.dart';
 
-class Letter extends ConsumerStatefulWidget {
-  const Letter({super.key});
+import '../../../../Widgets/LearningWidgets/maths_card.dart';
+import '../Tables/tables_screen.dart';
+
+
+class MathsOption extends ConsumerStatefulWidget {
+  const  MathsOption ({super.key});
 
   @override
-  _LetterState createState() => _LetterState();
+  _MathsOptionState createState() => _MathsOptionState();
 }
 
-class _LetterState extends ConsumerState<Letter> {
+class _MathsOptionState extends ConsumerState<MathsOption > {
   int? selectedCardIndex;
 
-  void fetchFirstEnglishAlphabet() async {
-    final ipAddress = ref.watch(ipAddressProvider);
-    final response = await http.get(Uri.parse('http://$ipAddress:5000/learning/alphabetEng'));
+  void fetchFirst() async {
+    final response = await http.get(Uri.parse('http://192.168.173.164:5000/learning/Number'));
     print(response.statusCode);
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
-      final alphabet = data['alphabet'];
+      final number = data['number'];
       final signImage = data['signImage'];
-      final objectImage = data['objectImage'];
-      final flag = data['flag'];
-      ref.read(alphabetProvider.notifier).setAlphabetData(
-        alphabet: alphabet,
+      final Basket = data['Basket'];
+      // final flag = data['flag'];
+      ref.read(NumberProvider.notifier).setNumberData(
+        number: number,
         signImage: signImage,
-        objectImage: objectImage,
-        flag: flag,
+        Basket: Basket,
+        // flag: flag,
       );
-      HapticFeedback.heavyImpact();
+
       // Navigate to the EnglishAlphabet screen
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (ctx) => const EnglishAlphabet(),
+          builder: (ctx) => const Numbers(),
         ),
       );
     } else {
@@ -52,35 +51,6 @@ class _LetterState extends ConsumerState<Letter> {
     }
   }
 
-  void fetchFirstGujaratiAlphabet() async {
-    final ipAddress = ref.watch(ipAddressProvider);
-    final response = await http.get(Uri.parse('http://$ipAddress:5000/learning/alphabetGuj'));
-    print(response.statusCode);
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      final alphabet = data['alphabet'];
-      final signImage = data['signImage'];
-      final objectImage = data['objectImage'];
-      final flag = data['flag'];
-      ref.read(GujaratialphabetProvider.notifier).setGujaratiAlphabetData(
-        alphabet: alphabet,
-        signImage: signImage,
-        objectImage: objectImage,
-        flag: flag,
-      );
-      HapticFeedback.heavyImpact();
-      // Navigate to the EnglishAlphabet screen
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (ctx) => const GujaratiAlphabet(),
-        ),
-      );
-    } else {
-      // Handle error
-      print('Failed to fetch alphabet data');
-    }
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,7 +59,7 @@ class _LetterState extends ConsumerState<Letter> {
         title: Align(
           alignment: Alignment.center,
           child: Text(
-            'Alphabets',
+            'Maths',
             style: GoogleFonts.openSans(
               fontSize: 28,
               color: Colors.black,
@@ -115,9 +85,9 @@ class _LetterState extends ConsumerState<Letter> {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
-                LetterCard(
-                  title: "English Alphabets",
-                  imagePath: "assets/Learning/alphabet.png",
+                MathsCard(
+                  title: "Numbers",
+                  imagePath: "assets/Tables/number.jpg",
                   isSelected: selectedCardIndex == 0,
                   onTap: () => setState(() {
                     if (selectedCardIndex == 0) {
@@ -127,10 +97,10 @@ class _LetterState extends ConsumerState<Letter> {
                     }
                   }),
                 ),
-                const SizedBox(height: 20),
-                LetterCard(
-                  title: "Gujarati Alphabets",
-                  imagePath: "assets/Learning/gujarati_alphabet.png",
+                const SizedBox(height: 32),
+                MathsCard(
+                  title: "Tables",
+                  imagePath: "assets/Tables/table.png",
                   isSelected: selectedCardIndex == 1,
                   onTap: () => setState(() {
                     if (selectedCardIndex == 1) {
@@ -140,20 +110,46 @@ class _LetterState extends ConsumerState<Letter> {
                     }
                   }),
                 ),
+                const SizedBox(height: 32),
+                MathsCard(
+                  title: "Arithmetic",
+                  imagePath: "assets/Tables/arithmetic.jpg",
+                  isSelected: selectedCardIndex == 2,
+                  onTap: () => setState(() {
+                    if (selectedCardIndex == 2) {
+                      selectedCardIndex = null;
+                    } else {
+                      selectedCardIndex = 2; // Select the card
+                    }
+                  }),
+                ),
               ],
             ),
           ),
-          const SizedBox(height: 32),
+          const SizedBox(height: 24),
           ElevatedButton(
             onPressed: selectedCardIndex != null
                 ? () {
               if (selectedCardIndex == 0) {
-                fetchFirstEnglishAlphabet();
+                fetchFirst();
               } else if (selectedCardIndex == 1) {
-                fetchFirstGujaratiAlphabet();
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (ctx) => const TablesScreen(),
+                  ),
+                );
+              } else if (selectedCardIndex == 2) {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (ctx) => const ArithmeticOperations(),
+                  ),
+                );
               }
             }
                 : null,
+
             child: Text(
               'Continue',
               style: GoogleFonts.openSans(

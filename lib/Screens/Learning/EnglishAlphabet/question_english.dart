@@ -8,7 +8,7 @@ class QuestionEnglish extends StatefulWidget {
   final List<String> options;
   final String answer;
 
-  QuestionEnglish({
+  const QuestionEnglish({super.key,
     required this.question,
     required this.options,
     required this.answer,

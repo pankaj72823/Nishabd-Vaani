@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class NumberTable extends StatefulWidget {
   final int multiplier;
 
-  NumberTable({required this.multiplier});
+  NumberTable({super.key, required this.multiplier});
 
   @override
   _NumberTableState createState() => _NumberTableState();
@@ -92,7 +92,7 @@ class _NumberTableState extends State<NumberTable> {
             ),
             if (showHand)
               AnimatedPositioned(
-                duration: Duration(milliseconds: 500),
+                duration: Duration(milliseconds: 700),
                 top: 15 + (currentIndex * 60), // Adjust this to match the position
                 right: 60,
                 child: Image.asset('assets/Tables/left_arrow.png', height: 50,),

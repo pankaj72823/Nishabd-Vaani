@@ -37,7 +37,7 @@ class CorrectGujarati extends ConsumerWidget {
               SizedBox(height: 40),
               ElevatedButton(
                 onPressed: () async{
-                    await ref.read(GujaratialphabetProvider.notifier).fetchNextAlphabet();
+                    await ref.read(GujaratialphabetProvider.notifier).fetchNextGujaratiAlphabet();
                     Future.delayed(Duration(milliseconds: 100), () {
                     Navigator.pushReplacement(
                       context,

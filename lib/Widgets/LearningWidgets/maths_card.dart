@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
-class LetterCard extends StatelessWidget {
+class MathsCard extends StatelessWidget {
   final String title;
   final String imagePath;
   final bool isSelected;
   final VoidCallback onTap;
 
-  const LetterCard({
+  const MathsCard({
     super.key,
     required this.title,
     required this.imagePath,
@@ -24,7 +24,7 @@ class LetterCard extends StatelessWidget {
       highlightColor: Colors.orangeAccent.withOpacity(0.9),
       borderRadius: BorderRadius.circular(10),
       child: Container(
-        height: 200,
+        height: 100,
         width: 400,
         decoration: BoxDecoration(
           color: isSelected ?  Colors.orange[300] : Colors.orange[100],
@@ -44,10 +44,10 @@ class LetterCard extends StatelessWidget {
             children: [
               Image.asset(
                 imagePath,
-                width: 80,
-                height: 80,
+                width: 100,
+                height: 100,
               ),
-              const SizedBox(width: 10),
+              const SizedBox(width: 20),
               Text(
                 title,
                 style: GoogleFonts.openSans(

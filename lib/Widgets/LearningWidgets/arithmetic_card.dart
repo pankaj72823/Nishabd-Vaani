@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
-class LearningCard extends StatelessWidget {
+class ArithmeticCard extends StatelessWidget {
   final String title;
   final String imagePath;
   final bool isSelected;
   final VoidCallback onTap;
 
-  const LearningCard({
+  const ArithmeticCard({
     super.key,
     required this.title,
     required this.imagePath,
@@ -40,10 +40,10 @@ class LearningCard extends StatelessWidget {
                 width: 80,
                 height: 80,
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               Text(
                 title,
-                style: GoogleFonts.openSans(fontSize: 24, fontWeight: FontWeight.bold),
+                style: GoogleFonts.openSans(fontSize: 22, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
             ],
