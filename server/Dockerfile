@@ -1,5 +1,5 @@
 # Use a base image with both Python and Node.js
-FROM nikolaik/python-nodejs:latest
+FROM nikolaik/python-nodejs:python3.12-nodejs22
 
 # Set up the working directory
 WORKDIR /home/pn/app

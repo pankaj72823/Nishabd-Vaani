@@ -1,31 +1,31 @@
 import dotenv from 'dotenv';
 dotenv.config();
-import passport from 'passport';
-import {Strategy ,ExtractJwt} from 'passport-jwt'
-import User from '../Models/User.js';
-const jwtSecret = process.env.jwtSecret
 
-passport.use(new Strategy({
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: jwtSecret
-},(jwt_payload, done) => {
-    User.findById(jwt_payload.sub)
-      .then(user => {
-        if (user) {
-          return done(null, user);
-        } else {
-          return done(null, false);
+import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
+import Student from '../Schema/Student.js';
+
+const secret = process.env.JWT_SECRETE;
+
+const opts = {
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: secret
+};
+
+const passportConfig = (passport) => {
+  passport.use(
+    new JwtStrategy(opts, async (jwt_payload, done) => {
+      try {
+        const student = await Student.findById(jwt_payload.id);
+        if (student) {
+          return done(null, student);
         }
-      })
-      .catch(err => done(err, false));
-}))
+        return done(null, false);
+      } catch (error) {
+        console.error(error);
+        return done(error, false);
+      }
+    })
+  );
+};
 
-passport.serializeUser((user, done) => {
-done(null, user.id);
-});
-
-passport.deserializeUser((id, done) => {
-User.findById(id).then(user => {
-    done(null, user);
-});
-});
+export default passportConfig;
