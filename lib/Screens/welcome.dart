@@ -12,17 +12,15 @@ class Welcome extends StatelessWidget{
     return WelcomeWidget(
       child: Column(
         children: [
-          Flexible(
-            flex: -2,
-            child: Center(
+          Center(
               child: Column(
                 children: [
-                  Image.asset('assets/Home_Screen/temp_logo.png', height: 90,),
-
+                  Image.asset(
+                    'assets/Home_Screen/temp_logo.png', height: 90,
+                  ),
                 ],
               ),
             ),
-          ),
           Flexible(
             flex: 1,
             child: Align(
@@ -37,7 +35,7 @@ class Welcome extends StatelessWidget{
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (e) => SignIn(),
+                            builder: (e) => const SignIn(),
                           ),
                         );
                       },

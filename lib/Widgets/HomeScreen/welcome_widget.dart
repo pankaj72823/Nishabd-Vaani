@@ -16,11 +16,11 @@ class WelcomeWidget extends StatelessWidget {
       body: Stack(
         children: [
           Image.asset(
-            'assets/Home_Screen/sign.jpg',
-            fit: BoxFit.contain,
-            width: double.infinity,
-            height: double.infinity,
-          ),
+              'assets/Home_Screen/sign.jpg',
+              fit: BoxFit.contain,
+              width: double.infinity,
+              height: double.infinity,
+            ),
           SafeArea(
             child: child!,
           )
