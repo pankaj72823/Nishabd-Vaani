@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
-import 'package:nishabdvaani/Screens/tabs_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nishabdvaani/Screens/welcome.dart';
 
 void main(){
   runApp(ProviderScope(child: MyApp()));
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget{
     return MaterialApp(
       title: 'NishabdVaani',
       debugShowCheckedModeBanner: false,
-      home: TabsScreen(),
+      home: Welcome(),
     );
   }
 

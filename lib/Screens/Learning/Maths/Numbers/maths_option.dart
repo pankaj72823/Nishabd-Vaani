@@ -133,14 +133,14 @@ class _MathsOptionState extends ConsumerState<MathsOption > {
               if (selectedCardIndex == 0) {
                 fetchFirst();
               } else if (selectedCardIndex == 1) {
-                Navigator.pushReplacement(
+                Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (ctx) => const TablesScreen(),
                   ),
                 );
               } else if (selectedCardIndex == 2) {
-                Navigator.pushReplacement(
+                Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (ctx) => const ArithmeticOperations(),

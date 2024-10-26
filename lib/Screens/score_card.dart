@@ -17,6 +17,7 @@ class _ScoreCardState extends State<ScoreCard>{
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         title: const Align(
           alignment: Alignment.center,

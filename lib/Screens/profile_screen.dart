@@ -1,188 +1,167 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nishabdvaani/Widgets/Profile/streak_calendar_widget.dart';
+import 'package:nishabdvaani/Screens/score_card.dart';
 
-class ProfileScreen extends StatelessWidget {
+import '../Widgets/Profile/streak_calendar_widget.dart';
+
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
   @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+
+  void _openStreakOverlay() {
+    showModalBottomSheet(
+        useSafeArea: true,
+        isScrollControlled: true,
+        context: context,
+        builder: (ctx) {
+          return const FractionallySizedBox(
+            heightFactor: 0.75,
+            child: StreakCalendarWidget(),
+          );
+        });
+  }
+
+  void _openScoreCardOverlay() {
+    showModalBottomSheet(
+        useSafeArea: true,
+        isScrollControlled: true,
+        context: context,
+        builder: (ctx) {
+          return const FractionallySizedBox(
+            heightFactor: 0.75,
+            child: ScoreCard(),
+          );
+        });
+  }
+  @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.lightBlue[100],
-        elevation: 1,
-        centerTitle: true,
-        title: Text(
-          'Profile',
-          style: GoogleFonts.openSans(
-            fontSize: 28,
+        title: Align(
+          alignment: Alignment.center,
+          child: Text('Profile', style: GoogleFonts.openSans(
+            fontSize: 26,
             fontWeight: FontWeight.bold,
-            color: Colors.black87,
+            color: Colors.black,),
           ),
         ),
+        backgroundColor: Colors.lightBlue[100],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-                side: BorderSide(
-                  color: Colors.blue,
-                  width: 3,
+            const SizedBox(height: 20),
+            const CircleAvatar(
+              radius: 60,
+              backgroundImage: AssetImage('assets/Home_Screen/card.png'),
+            ),
+            const SizedBox(height: 15),
+            // Name
+            Text(
+              'Pankaj Kurmi',
+              style: GoogleFonts.openSans(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+            const SizedBox(height: 5),
+            // Phone or Email
+            Text(
+              'Phone number',
+              style: GoogleFonts.openSans(
+                fontSize: 16,
+                color: Colors.grey[600],
+              ),
+            ),
+            const SizedBox(height: 15),
+            ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                backgroundColor: Colors.yellow[700],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
                 ),
               ),
-              shadowColor: Colors.black26,
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 24,
-                  horizontal: 16,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Image.asset('assets/Profile/resume.png', height: 30, width: 30,),
-                        const SizedBox(width: 10,),
-                        Text(
-                          'Personal Details',
-                          style: GoogleFonts.openSans(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      'Name: Mohit Sharma',
-                      style: GoogleFonts.openSans(fontSize: 16),
-                    ),
-                    Text(
-                      'Age: 7',
-                      style: GoogleFonts.openSans(fontSize: 16),
-                    ),
-                    Text(
-                      'Location: Ahmedabad',
-                      style: GoogleFonts.openSans(fontSize: 16),
-                    ),
-                  ],
+              child: Text(
+                'Edit Profile',
+                style: GoogleFonts.openSans(
+                  fontSize: 18,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-            const SizedBox(height: 16),
-            Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-                side: BorderSide(
-                  color: Colors.blue,
-                  width: 3,
-                ),
-              ),
-              shadowColor: Colors.black26,
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Image.asset('assets/Profile/score.png', height: 30, width: 30,),
-                        const SizedBox(width: 10,),
-                        Text(
-                          'ScoreCard',
-                          style: GoogleFonts.openSans(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          ),
+            const SizedBox(height: 30),
+
+            profileWidgets(Icons.history, 'Streaks', _openStreakOverlay),
+            profileWidgets(Icons.format_list_numbered_sharp, 'ScoreCard', _openScoreCardOverlay),
+            profileWidgets(Icons.settings, 'Settings', _openScoreCardOverlay),
+
+            const SizedBox(height: 28,),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      const Icon(Icons.logout, color: Colors.red, size: 30,),
+                      const SizedBox(width: 10),
+                      Text(
+                        'Logout',
+                        style: GoogleFonts.openSans(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red,
+                          fontSize: 20,
                         ),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Maths',
-                          style: GoogleFonts.openSans(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black87,
-                          ),
-                        ),
-                        Text(
-                          '85/100',
-                          style: GoogleFonts.openSans(
-                            fontSize: 16,
-                            color: Colors.black54,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Alphabets',
-                          style: GoogleFonts.openSans(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black87,
-                          ),
-                        ),
-                        Text(
-                          '40/50',
-                          style: GoogleFonts.openSans(
-                            fontSize: 16,
-                            color: Colors.black54,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Science',
-                          style: GoogleFonts.openSans(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black87,
-                          ),
-                        ),
-                        Text(
-                          '35/50',
-                          style: GoogleFonts.openSans(
-                            fontSize: 16,
-                            color: Colors.black54,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
-            Container(
-              height:220,
-              width: 200,
-              child: StreakCalendarWidget(),
-            )
+            const SizedBox(height: 20),
           ],
         ),
       ),
+    );
+  }
+
+
+  Widget profileWidgets(IconData icon, String title,VoidCallback overlaymain ) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 30),
+      child: Row(
+
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Icon(icon, color: Colors.blue[600], size: 30,),
+                const SizedBox(width: 10),
+                Text(
+                  title,
+                  style: GoogleFonts.openSans(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                    fontSize: 20,
+                  ),
+                ),
+              ],
+            ),
+            IconButton(onPressed: overlaymain, icon: const Icon(Icons.arrow_forward_ios, color: Colors.grey,))
+          ],
+        ),
     );
   }
 }
