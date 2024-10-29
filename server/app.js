@@ -18,8 +18,8 @@ import BoardRoute from './Router/BoardRouter.js';
 import EngBoardRoute from './Router/engBoardRouter.js';
 import studentRoutes from './Router/student.js';
 import fakerRoute from './Router/Faker.js';
+import quizRoute from './Router/QuizRouter.js';
 import client from 'prom-client';
-
 // Initialize Express and HTTP server
 const app = express();
 const server = createServer(app);
@@ -84,7 +84,8 @@ app.use('/learning', learningRoute);
 app.use('/conversion', ConversRoute);
 app.use('/gujBoard', BoardRoute);
 app.use('/EngBoard', EngBoardRoute);
-app.use('/fake-user', fakerRoute)
+app.use('/fake-user', fakerRoute);
+app.use('/quiz', quizRoute);
 app.use('/', websocketRoutes); // This will handle the WebSocket initialization route
 
 // Root route
@@ -98,7 +99,7 @@ app.get('/metrics', async (req, res) => {
 
 // Global error handling middleware
 app.use((err, req, res, next) => {
-  console.error(err.message); // Log the error to the console
+  console.error(err); // Log the error to the console
   const statusCode = err.status || 500; // Use the error status if available, otherwise use 500
   res.status(statusCode).json({
     error: {

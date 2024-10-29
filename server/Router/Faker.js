@@ -51,7 +51,7 @@ router.get('/', async (req, res) => {
       quizResults: generateQuizResults() // Random quiz results
     });
 
-    // await dummyStudent.save();
+    await dummyStudent.save();
     res.status(201).json({
       message: 'Dummy student created successfully',
       student: dummyStudent

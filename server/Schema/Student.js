@@ -1,24 +1,10 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
+import AttemptedQuiz from './AttemptedQuiz.js';
 
 const dailyActivitySchema = new mongoose.Schema({
     date: { type: Date, required: true },
     activeLevel: { type: Number, default: 0 }
-});
-
-const quizResultSchema = new mongoose.Schema({
-    topic: {
-        type: String,
-        required: true
-    },
-    score: {
-        type: Number,
-        required: true
-    },
-    date: {
-        type: Date,
-        default: Date.now
-    }
 });
 
 const studentSchema = new mongoose.Schema({
@@ -46,7 +32,12 @@ const studentSchema = new mongoose.Schema({
         unique: true 
     },
     dailyActivity: [dailyActivitySchema],
-    quizResults: [quizResultSchema], 
+    attemptedQuiz: {
+        science: { type: [AttemptedQuiz.schema], default: [] }, // Array of QuizAttempt objects
+        maths: { type: [AttemptedQuiz.schema], default: [] },
+        alpha: { type: [AttemptedQuiz.schema], default: [] },
+        word: { type: [AttemptedQuiz.schema], default: [] },
+  },
 }, { timestamps: true });
 
 studentSchema.pre('save', async function (next) {
