@@ -33,52 +33,54 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-                Image.asset(
-                  'assets/Home_Screen/card.png',
-                  height: 300,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+                  Image.asset(
+                    'assets/Home_Screen/card.png',
+                    height: 300,
+                  ),
+              Card(
+                color: Colors.white,
+                shadowColor: Colors.grey,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.0),
                 ),
-            Card(
-              color: Colors.white,
-              shadowColor: Colors.grey,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16.0),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  children: [
-                    Text(
-                      'Hi Learner!',
-                      style: GoogleFonts.openSans(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    children: [
+                      Text(
+                        'Hi Learner!',
+                        style: GoogleFonts.openSans(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 16),
-                    Image.asset(
-                      'assets/Home_Screen/study.png',
-                      height: 100,
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      "It's never too late to start Learning",
-                      style: GoogleFonts.openSans(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                      const SizedBox(height: 16),
+                      Image.asset(
+                        'assets/Home_Screen/study.png',
+                        height: 100,
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 16),
+                      Text(
+                        "It's never too late to start Learning",
+                        style: GoogleFonts.openSans(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

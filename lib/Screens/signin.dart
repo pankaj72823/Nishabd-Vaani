@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nishabdvaani/Provider/cookie_provider.dart';
 import 'package:nishabdvaani/Screens/signup.dart';
 import 'package:nishabdvaani/Widgets/HomeScreen/welcome_widget.dart';
 import 'package:nishabdvaani/Screens/tabs_screen.dart';
@@ -38,13 +39,16 @@ class _SignIn extends ConsumerState<SignIn> {
           }
           ),
         );
-        Navigator.of(context).pop();
+        // Navigator.of(context).pop();
         if (response.statusCode == 200) {
           final data = jsonDecode(response.body);
+          final cookie = response.headers['Set-Cookie'];
+          if(cookie!=null) await ref.read(cookieProvider.notifier).saveCookie(cookie);
 
           if(data['token']!=null) {
             final token = data['token'];
             ref.read(tokenProvider.notifier).state = token;
+
 
           } else{
             print('Token not found in response');
@@ -201,7 +205,7 @@ class _SignIn extends ConsumerState<SignIn> {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: ()  async {
+                          onPressed: () async{
                             await signin();
                             Navigator.push(
                               context,

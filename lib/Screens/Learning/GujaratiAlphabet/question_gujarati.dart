@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nishabdvaani/Screens/Learning/GujaratiAlphabet/correct_gujarati.dart';
 import 'package:nishabdvaani/Screens/Learning/GujaratiAlphabet/incorrect_gujarati.dart';
-// import 'package:nishabdvaani/Screens/Learning/GujaratiAlphabet/correct_gujarati.dart';
 
 class QuestionGujarati extends StatefulWidget {
   final String question;
@@ -21,6 +20,7 @@ class QuestionGujarati extends StatefulWidget {
 
 class _QuestionGujaratiState extends State<QuestionGujarati> {
   String? _selectedOption;
+
 
   void _checkAnswer(BuildContext context) {
     if (_selectedOption == widget.answer) {
@@ -72,14 +72,14 @@ class _QuestionGujaratiState extends State<QuestionGujarati> {
             children: [
               Text(
                 widget.question,
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                style: GoogleFonts.openSans(fontSize: 28, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text(
                 'Guess the Sign of the letter',
                 style: GoogleFonts.openSans(fontSize: 22, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               for (var option in widget.options)
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
