@@ -154,14 +154,6 @@ class _LetterState extends ConsumerState<Letter> {
               }
             }
                 : null,
-            child: Text(
-              'Continue',
-              style: GoogleFonts.openSans(
-                fontSize: 28,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.orange,
               shape: RoundedRectangleBorder(
@@ -174,6 +166,14 @@ class _LetterState extends ConsumerState<Letter> {
               padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
               textStyle: const TextStyle(fontSize: 16),
               elevation: 8,
+            ),
+            child: Text(
+              'Continue',
+              style: GoogleFonts.openSans(
+                fontSize: 28,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           const SizedBox(height: 20),

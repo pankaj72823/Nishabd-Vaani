@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nishabdvaani/Screens/Practice/writing_pad.dart';
+import 'package:nishabdvaani/Screens/Practice/Quiz/start_screen.dart';
 import 'package:nishabdvaani/Widgets/PracticeQuiz/quiz_card.dart';
 class PracticeQuiz extends StatefulWidget {
   const PracticeQuiz({super.key});
@@ -87,7 +87,7 @@ class _PracticeQuizState extends State<PracticeQuiz> {
                 onPressed: () {
                   if(_selectedQuiz == 'Alphabet Quiz'){
                     Navigator.push(context, MaterialPageRoute(
-                    builder: (ctx) => WritingPad(),
+                    builder: (ctx) => const StartScreen(),
                   ),
                   );
                   }

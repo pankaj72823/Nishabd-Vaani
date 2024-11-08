@@ -6,7 +6,9 @@ import 'package:nishabdvaani/Provider/ip_provider.dart';
 
 final GujaratialphabetProvider = StateNotifierProvider<GujaratiAlphabetNotifier, GujaratiAlphabetState>((ref) {
   return GujaratiAlphabetNotifier(ref);
-});
+},);
+
+
 
 class GujaratiAlphabetState {
   final String alphabet;
