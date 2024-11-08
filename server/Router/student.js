@@ -75,7 +75,7 @@ router.post('/login', async (req, res) => {
     const payload = { id: student.id, name: student.name };
     const token = jwt.sign(payload, secret, { expiresIn: '1d' });
 
-    res.json({ token: token });
+    res.json({ token: 'Bearer ' + token });
   } catch (error) {
     res.status(500).json({ error: 'Failed to login' });
   }
