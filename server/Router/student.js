@@ -50,7 +50,7 @@ router.post('/register', async (req, res) => {
     const payload = { id: student.id, name: student.name };
     const token = jwt.sign(payload, secret, { expiresIn: '1d' });
 
-    res.status(201).json({ token: token });;
+    res.status(201).json({ token: 'Bearer ' + token });;
   } catch (error) {
     console.log(error)
     res.status(500).json({ error: 'Failed to register student' });
