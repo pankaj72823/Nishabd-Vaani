@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
-
 import express from 'express';
+import chalk from 'chalk';
 import { createServer } from 'http';
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
@@ -10,6 +10,7 @@ import passport from 'passport';
 import cors from './config/corsConfig.js';
 import './config/multer.js';
 import './config/mongodb.js';
+import { displayStartupMessage } from './config/start.js';
 import passportConfig from './config/passport.js';
 import websocketRoutes from './Router/websocketRoutes.js';
 import learningRoute from './Router/learningRouter.js';
@@ -18,9 +19,10 @@ import BoardRoute from './Router/BoardRouter.js';
 import EngBoardRoute from './Router/engBoardRouter.js';
 import studentRoutes from './Router/student.js';
 import fakerRoute from './Router/Faker.js';
-import quizRoute from './Router/QuizRouter.js';
+import quizRoute from './Router/QuizRoute.js';
 import client from 'prom-client';
 // Initialize Express and HTTP server
+displayStartupMessage();
 const app = express();
 const server = createServer(app);
 
@@ -69,14 +71,32 @@ passportConfig(passport); // Passport config
 
 // Request logging middleware
 app.use((req, res, next) => {
-  const Logtime = new Date(Date.now());
-  if (req.path !== "/appIcon.ico") {
+  const start = Date.now();
+  const Logtime = new Date().toLocaleString();
+
+  res.on('finish', () => {
+    const duration = Date.now() - start;
+    const methodColor = req.method === 'GET' ? chalk.green :
+                        req.method === 'POST' ? chalk.blue :
+                        req.method === 'PUT' ? chalk.yellow :
+                        req.method === 'DELETE' ? chalk.red : chalk.white;
+    
+    const statusColor = res.statusCode >= 500 ? chalk.red :
+                        res.statusCode >= 400 ? chalk.yellow :
+                        res.statusCode >= 300 ? chalk.cyan :
+                        res.statusCode >= 200 ? chalk.green : chalk.white;
+
     console.log(
-      `Method : ${req.method} \n Path : ${req.path} \n Time : ${Logtime} \n`
+      `\n${chalk.bgWhite.black(' LOG ')} ${methodColor(req.method)} ${chalk.bold(req.path)} ` +
+      `\nStatus: ${statusColor(res.statusCode)} ` +
+      `\nTime: ${chalk.gray(Logtime)} ` +
+      `\nDuration: ${chalk.magenta(duration + 'ms')}\n`
     );
-  }
+  });
+
   next();
 });
+
 
 // API routes
 app.use('/students', studentRoutes);

@@ -50,7 +50,7 @@ router.post('/register', async (req, res) => {
     const payload = { id: student.id, name: student.name };
     const token = jwt.sign(payload, secret, { expiresIn: '1d' });
 
-    res.status(201).json({ token: 'Bearer ' + token });;
+    res.status(201).json({ token: token });;
   } catch (error) {
     console.log(error)
     res.status(500).json({ error: 'Failed to register student' });
@@ -75,7 +75,7 @@ router.post('/login', async (req, res) => {
     const payload = { id: student.id, name: student.name };
     const token = jwt.sign(payload, secret, { expiresIn: '1d' });
 
-    res.json({ token: 'Bearer ' + token });
+    res.json({ token: token });
   } catch (error) {
     res.status(500).json({ error: 'Failed to login' });
   }
@@ -92,20 +92,13 @@ router.get('/profile', passport.authenticate('jwt', { session: false }), async (
         return res.status(404).json({ message: 'Student not found' });
       }
 
-      // Create quiz summary
-      const quizSummary = {};
-      student.quizResults.forEach((quiz) => {
-        if (!quizSummary[quiz.topic]) {
-          quizSummary[quiz.topic] = [];
-        }
-        quizSummary[quiz.topic].push(quiz.score);
-      });
+      const scoresSummary = {
+        science: student.attemptedQuiz.science.map(quiz => quiz.totalResult),
+        maths: student.attemptedQuiz.maths.map(quiz => quiz.totalResult),
+        alpha: student.attemptedQuiz.alpha.map(quiz => quiz.totalResult),
+        word: student.attemptedQuiz.word.map(quiz => quiz.totalResult)
+    };
 
-      // Convert the object into an array of topics with their respective scores
-      const quizData = Object.keys(quizSummary).map(topic => ({
-        topic: topic,
-        Quiz_array: quizSummary[topic]
-      }));
 
       // Get current month and activity data
       const now = new Date();
@@ -117,15 +110,16 @@ router.get('/profile', passport.authenticate('jwt', { session: false }), async (
         ...student.toObject(),  // Converts Mongoose document to plain JS object
         month: monthName,
         activityArray: monthlyActivityArray,
-        quizData: quizData,
+        quizData: scoresSummary,
       };
       delete responseData.dailyActivity;
-      delete responseData.quizResults;
+      delete responseData.attemptedQuiz;
       // Send response
       res.json(responseData);
 
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching user profile' });
+    console.log(error)
+    res.status(500).json( error );
   }
 });
 
