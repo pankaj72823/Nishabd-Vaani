@@ -44,6 +44,7 @@ class StartScreen extends ConsumerWidget {
                   ElevatedButton(
                     onPressed: () async {
                         await ref.read(QuizProvider.notifier).loadQuiz();
+                        ref.read(counterProvider.notifier).state++;
                         Navigator.push(context, MaterialPageRoute(
                         builder: (ctx) => const Question(),
                         ),

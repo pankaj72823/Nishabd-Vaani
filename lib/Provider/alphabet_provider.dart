@@ -3,6 +3,9 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nishabdvaani/Provider/ip_provider.dart';
+import 'package:nishabdvaani/Provider/tokenProvider.dart';
+
+import 'cookie_provider.dart';
 
 final alphabetProvider = StateNotifierProvider<AlphabetNotifier, AlphabetState>((ref) {
   return AlphabetNotifier(ref);
@@ -56,9 +59,18 @@ class AlphabetNotifier extends StateNotifier<AlphabetState> {
   }
 
   Future<void> fetchNextAlphabet() async {
+
     final ipAddress = ref.watch(ipAddressProvider);
+    final token = ref.watch(tokenProvider);
+    final cookie = ref.watch(cookieProvider);
+
     try {
       final response = await http.get(
+          headers: {
+            'Authorization': '$token',
+            'Content-Type' : 'application/json',
+            'Cookie' : '$cookie',
+          },
           Uri.parse('http://$ipAddress:5000/learning/alphabetEng/next'));
 
       if (response.statusCode == 200) {
@@ -98,8 +110,15 @@ class AlphabetNotifier extends StateNotifier<AlphabetState> {
 
   Future<void> fetchPreviousAlphabet() async {
     final ipAddress = ref.watch(ipAddressProvider);
+    final token = ref.watch(tokenProvider);
+    final cookie = ref.watch(cookieProvider);
     try {
       final response = await http.get(
+          headers: {
+            'Authorization': '$token',
+            'Content-Type' : 'application/json',
+            'Cookie' : '$cookie',
+          },
           Uri.parse('http://$ipAddress:5000/learning/alphabetEng/prev'));
 
       if (response.statusCode == 200) {

@@ -9,7 +9,9 @@ import 'dart:convert';
 import 'package:nishabdvaani/Screens/Learning/EnglishAlphabet/english_alphabet.dart';
 import 'package:nishabdvaani/Screens/Learning/GujaratiAlphabet/gujarati_alphabet.dart';
 import '../../Provider/alphabet_provider.dart';
+import '../../Provider/cookie_provider.dart';
 import '../../Provider/gujarati_alphabet_provider.dart';
+import '../../Provider/tokenProvider.dart';
 import '../../Widgets/LearningWidgets/letter_card.dart';
 
 class Letter extends ConsumerStatefulWidget {
@@ -24,7 +26,16 @@ class _LetterState extends ConsumerState<Letter> {
 
   void fetchFirstEnglishAlphabet() async {
     final ipAddress = ref.watch(ipAddressProvider);
-    final response = await http.get(Uri.parse('http://$ipAddress:5000/learning/alphabetEng'));
+    final token = ref.watch(tokenProvider);
+    final cookie = ref.watch(cookieProvider);
+    final response = await http.get(
+        headers: {
+          'Authorization': '$token',
+          'Content-Type' : 'application/json',
+          'Cookie' : '$cookie',
+        },
+        Uri.parse('http://$ipAddress:5000/learning/alphabetEng')
+    );
     print(response.statusCode);
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
@@ -54,7 +65,16 @@ class _LetterState extends ConsumerState<Letter> {
 
   void fetchFirstGujaratiAlphabet() async {
     final ipAddress = ref.watch(ipAddressProvider);
-    final response = await http.get(Uri.parse('http://$ipAddress:5000/learning/alphabetGuj'));
+    final token = ref.watch(tokenProvider);
+    final cookie = ref.watch(cookieProvider);
+    final response = await http.get(
+        headers: {
+          'Authorization': '$token',
+          'Content-Type' : 'application/json',
+          'Cookie' : '$cookie',
+        },
+        Uri.parse('http://$ipAddress:5000/learning/alphabetGuj')
+    );
     print(response.statusCode);
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);

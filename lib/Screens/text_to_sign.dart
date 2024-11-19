@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:nishabdvaani/Provider/ip_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../Provider/cookie_provider.dart';
+import '../Provider/tokenProvider.dart';
 
 class TextToSign extends ConsumerStatefulWidget {
   const TextToSign({Key? key}) : super(key: key);
@@ -27,7 +29,17 @@ class _TextToSignState extends ConsumerState<TextToSign> {
 
   Future<void> fetchSignData() async {
     final ipAddress = ref.watch(ipAddressProvider);
-    final response = await http.get(Uri.parse('http://$ipAddress:5000/conversion'));
+    final token = ref.watch(tokenProvider);
+    final cookie = ref.watch(cookieProvider);
+
+    final response = await http.get(
+      headers: {
+        'Authorization': '$token',
+        'Content-Type' : 'application/json',
+        'Cookie' : '$cookie',
+      },
+        Uri.parse('http://$ipAddress:5000/conversion'),
+    );
 
     if (response.statusCode == 200) {
       final List<dynamic> fetchedData = json.decode(response.body);
@@ -51,6 +63,8 @@ class _TextToSignState extends ConsumerState<TextToSign> {
 
   Future<void> _fetchSign() async {
     final ipAddress = ref.watch(ipAddressProvider);
+    final token = ref.watch(tokenProvider);
+    final cookie = ref.watch(cookieProvider);
     print('Fetching starts');
     final String word = _textController.text.trim();
     if (word.isEmpty) {
@@ -65,9 +79,12 @@ class _TextToSignState extends ConsumerState<TextToSign> {
     try {
        print('request sending');
       final response = await http.post(
-      
+        headers: {
+          'Authorization': '$token',
+          'Content-Type' : 'application/json',
+          'Cookie' : '$cookie',
+        },
         Uri.parse('http://$ipAddress:5000/conversion'),
-        headers: {'Content-Type': 'application/json'},
         body: jsonEncode({'word': word}),
       );
       print(response.statusCode);

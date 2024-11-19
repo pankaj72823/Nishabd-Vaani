@@ -42,19 +42,39 @@ class _SignIn extends ConsumerState<SignIn> {
         // Navigator.of(context).pop();
         if (response.statusCode == 200) {
           final data = jsonDecode(response.body);
-          final cookie = response.headers['Set-Cookie'];
+          final cookie = response.headers['set-cookie']
+              ?.split(';')
+              .firstWhere((cookie) => cookie.trim().startsWith('connect.sid='));
+          print(cookie);
+
+          // print('connect.sid: $cookie');
+          // final cookie = response.headers['set-cookie'];
+          // print(response.headers);
+          // print(cookie);
           if(cookie!=null) await ref.read(cookieProvider.notifier).saveCookie(cookie);
 
           if(data['token']!=null) {
             final token = data['token'];
+            print(token);
             ref.read(tokenProvider.notifier).state = token;
-
-
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (ctx) => TabsScreen()
+              ),
+            );
           } else{
+            Navigator.of(context).pop();
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text("Failed to Signin, try again ")),
+            );
             print('Token not found in response');
           }
         }
         else{
+          Navigator.of(context).pop();
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Failed to Signin, try again ")),
+          );
           print('Failed to signin. Status code: ${response.statusCode}');
         }
       }
@@ -207,11 +227,11 @@ class _SignIn extends ConsumerState<SignIn> {
                         child: ElevatedButton(
                           onPressed: () async{
                             await signin();
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (ctx) => TabsScreen()
-                              ),
-                            );
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(builder: (ctx) => TabsScreen()
+                            //   ),
+                            // );
                           },
                           style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),

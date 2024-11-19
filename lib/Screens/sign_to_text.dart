@@ -9,6 +9,9 @@ import 'dart:math';
 import 'package:nishabdvaani/Provider/ip_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../Provider/cookie_provider.dart';
+import '../Provider/tokenProvider.dart';
+
 class SignToText extends ConsumerStatefulWidget {
   const SignToText({super.key});
 
@@ -54,10 +57,20 @@ class _SignToTextState extends ConsumerState<SignToText> {
   }
 
   Future<void> _startWebSocket() async {
+
     final ipAddress = ref.watch(ipAddressProvider);
+    final token = ref.watch(tokenProvider);
+    final cookie = ref.watch(cookieProvider);
     try {
       final response =
-      await http.get(Uri.parse('http://$ipAddress:5000/start-websocket'));
+      await http.get(
+        headers: {
+          'Authorization': '$token',
+          'Content-Type' : 'application/json',
+          'Cookie' : '$cookie',
+        },
+          Uri.parse('http://$ipAddress:5000/start-websocket'),
+      );
       final message = response.body;
 
       if (message.contains('WebSocket connection is now active.')) {
