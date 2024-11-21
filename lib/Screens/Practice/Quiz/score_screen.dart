@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nishabdvaani/Screens/Practice/Quiz/start_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ScoreScreen extends ConsumerWidget {
   const ScoreScreen({super.key, required this.score});
@@ -47,7 +48,7 @@ class ScoreScreen extends ConsumerWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'Alphabet Score',
+                                AppLocalizations.of(context)!.alphabet_score,
                                 style: GoogleFonts.openSans(
                                   fontSize: 24,
                                 ),
@@ -104,7 +105,7 @@ class ScoreScreen extends ConsumerWidget {
                                 const SizedBox(height: 8),
                                 Center(
                                   child: Text(
-                                    'Total Questions',
+                                    AppLocalizations.of(context)!.total_questions,
                                     style: GoogleFonts.openSans(
                                       fontSize: 18,
                                     ),
@@ -163,13 +164,13 @@ class ScoreScreen extends ConsumerWidget {
                                   MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'Correct',
+                                      AppLocalizations.of(context)!.correct,
                                       style: GoogleFonts.openSans(
                                         fontSize: 16,
                                       ),
                                     ),
                                     Text(
-                                      'Wrong',
+                                      AppLocalizations.of(context)!.wrong,
                                       style: GoogleFonts.openSans(
                                         fontSize: 16,
                                       ),
@@ -215,7 +216,7 @@ class ScoreScreen extends ConsumerWidget {
                   ),
                   const SizedBox(width: 48),
                   Text(
-                    'Play Again',
+                    AppLocalizations.of(context)!.play_again,
                     style: GoogleFonts.openSans(
                       fontSize: 18,
                     ),

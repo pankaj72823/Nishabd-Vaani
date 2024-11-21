@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:nishabdvaani/Provider/quiz_provider.dart';
 import 'package:nishabdvaani/Screens/Practice/Quiz/score_screen.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Question extends ConsumerStatefulWidget{
   const Question({super.key});
@@ -380,7 +381,7 @@ class _Question extends ConsumerState<Question>{
                         child:  Container(
                           child: Align(
                             alignment: Alignment.center,
-                            child: Text( _isPrimary! ? 'Check Answer' : 'Next',
+                            child: Text( _isPrimary! ? AppLocalizations.of(context)!.check_answer : AppLocalizations.of(context)!.next,
                               style:
                               GoogleFonts.openSans(
                                 fontWeight: FontWeight.bold,
@@ -744,7 +745,7 @@ class _Question extends ConsumerState<Question>{
                       child:  Container(
                         child: Align(
                           alignment: Alignment.center,
-                          child: Text( 'Next',
+                          child: Text(AppLocalizations.of(context)!.next,
                             style:
                             GoogleFonts.openSans(
                               fontWeight: FontWeight.bold,

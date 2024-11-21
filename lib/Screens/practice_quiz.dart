@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nishabdvaani/Screens/Practice/Quiz/start_screen.dart';
 import 'package:nishabdvaani/Widgets/PracticeQuiz/quiz_card.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class PracticeQuiz extends StatefulWidget {
   const PracticeQuiz({super.key});
 
@@ -19,7 +21,7 @@ class _PracticeQuizState extends State<PracticeQuiz> {
       appBar: AppBar(
         title: Align(
             alignment: Alignment.center,
-            child: Text('Quiz', style: GoogleFonts.openSans(fontSize: 28, fontWeight: FontWeight.bold))),
+            child: Text(AppLocalizations.of(context)!.quiz_time, style: GoogleFonts.openSans(fontSize: 28, fontWeight: FontWeight.bold))),
         backgroundColor: Colors.orange,
       ),
       body: Padding(
@@ -28,7 +30,7 @@ class _PracticeQuizState extends State<PracticeQuiz> {
           children: [
             const SizedBox(height: 16,),
             Text(
-              'Which quiz do you want to play?',
+                AppLocalizations.of(context)!.quiz_choice,
               style: GoogleFonts.openSans(fontSize: 18, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
@@ -40,42 +42,42 @@ class _PracticeQuizState extends State<PracticeQuiz> {
                 mainAxisSpacing: 16,
                 children: [
                   QuizCard(
-                    title: 'Maths',
+                    title: AppLocalizations.of(context)!.maths,
                     imagePath: 'assets/Home_Screen/study.png',
-                    isSelected: _selectedQuiz == 'Maths',
+                    isSelected: _selectedQuiz == AppLocalizations.of(context)!.maths,
                     onTap: () {
                       setState(() {
-                        _selectedQuiz = _selectedQuiz == 'Maths' ? null : 'Maths';
+                        _selectedQuiz = _selectedQuiz == AppLocalizations.of(context)!.maths ? null : AppLocalizations.of(context)!.maths;
                       });
                     },
                   ),
                   QuizCard(
-                    title: 'Science',
+                    title: AppLocalizations.of(context)!.science,
                     imagePath: 'assets/Home_Screen/study.png',
-                    isSelected: _selectedQuiz == 'Science',
+                    isSelected: _selectedQuiz == AppLocalizations.of(context)!.science,
                     onTap: () {
                       setState(() {
-                        _selectedQuiz = _selectedQuiz == 'Science' ? null : 'Science';
+                        _selectedQuiz = _selectedQuiz ==AppLocalizations.of(context)!.science ? null : AppLocalizations.of(context)!.science;
                       });
                     },
                   ),
                   QuizCard(
-                    title: 'Alphabet Practice',
+                    title: AppLocalizations.of(context)!.alphabet_practice,
                     imagePath: 'assets/Home_Screen/study.png',
-                    isSelected: _selectedQuiz == 'Alphabet Quiz',
+                    isSelected: _selectedQuiz == AppLocalizations.of(context)!.alphabet_practice,
                     onTap: () {
                       setState(() {
-                        _selectedQuiz = _selectedQuiz == 'Alphabet Quiz' ? null : 'Alphabet Quiz';
+                        _selectedQuiz = _selectedQuiz == AppLocalizations.of(context)!.alphabet_practice? null :AppLocalizations.of(context)!.alphabet_practice;
                       });
                     },
                   ),
                   QuizCard(
-                    title: 'Match Word',
+                    title: AppLocalizations.of(context)!.match_word,
                     imagePath: 'assets/Home_Screen/study.png',
-                    isSelected: _selectedQuiz == 'Match Word',
+                    isSelected: _selectedQuiz == AppLocalizations.of(context)!.match_word,
                     onTap: () {
                       setState(() {
-                        _selectedQuiz = _selectedQuiz == 'Match Word' ? null : 'Match Word';
+                        _selectedQuiz = _selectedQuiz ==AppLocalizations.of(context)!.match_word ? null : AppLocalizations.of(context)!.match_word;
                       });
                     },
                   ),
@@ -85,7 +87,7 @@ class _PracticeQuizState extends State<PracticeQuiz> {
             if (_selectedQuiz != null)
               ElevatedButton(
                 onPressed: () {
-                  if(_selectedQuiz == 'Alphabet Quiz'){
+                  if(_selectedQuiz == AppLocalizations.of(context)!.alphabet_practice){
                     Navigator.push(context, MaterialPageRoute(
                     builder: (ctx) => const StartScreen(),
                   ),
@@ -93,7 +95,7 @@ class _PracticeQuizState extends State<PracticeQuiz> {
                   }
                 },
                 child: Text(
-                  'Continue',
+                  AppLocalizations.of(context)!.continue_text,
                   style: GoogleFonts.openSans(fontSize: 28, color: Colors.black, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),

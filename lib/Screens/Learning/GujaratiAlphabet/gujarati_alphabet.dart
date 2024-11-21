@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:nishabdvaani/Screens/Learning/letter.dart';
 import '../../../Provider/gujarati_alphabet_provider.dart';
 import 'package:nishabdvaani/Screens/Learning/GujaratiAlphabet/question_gujarati.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GujaratiAlphabet extends ConsumerWidget {
   const GujaratiAlphabet({super.key});
@@ -43,7 +44,7 @@ class GujaratiAlphabet extends ConsumerWidget {
         title: Align(
           alignment: Alignment.center,
           child: Text(
-            'Gujarati Alphabet',
+            AppLocalizations.of(context)!.gujarati_alphabets,
             style: GoogleFonts.openSans(
               color: Colors.white,
               fontSize: 24,

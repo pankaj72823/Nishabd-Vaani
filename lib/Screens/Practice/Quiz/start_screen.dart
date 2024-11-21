@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nishabdvaani/Provider/quiz_provider.dart';
 import 'package:nishabdvaani/Screens/Practice/Quiz/question.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class StartScreen extends ConsumerWidget {
   const StartScreen({super.key});
@@ -33,7 +34,7 @@ class StartScreen extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "It's Quiz Time!",
+                    AppLocalizations.of(context)!.quiz_time,
                     style: GoogleFonts.poppins(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
@@ -59,7 +60,7 @@ class StartScreen extends ConsumerWidget {
                       elevation: 10,
                     ),
                     child: Text(
-                      'Start Quiz',
+                      AppLocalizations.of(context)!.start_quiz,
                       style: GoogleFonts.poppins(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,

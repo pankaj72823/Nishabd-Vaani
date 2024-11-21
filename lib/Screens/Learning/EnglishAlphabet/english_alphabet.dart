@@ -3,7 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nishabdvaani/Screens/Learning/letter.dart';
 import '../../../Provider/alphabet_provider.dart';
-import 'package:nishabdvaani/Screens/Learning/EnglishAlphabet/question_english.dart'; 
+import 'package:nishabdvaani/Screens/Learning/EnglishAlphabet/question_english.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EnglishAlphabet extends ConsumerWidget {
   const EnglishAlphabet({super.key});
@@ -43,7 +44,7 @@ class EnglishAlphabet extends ConsumerWidget {
         title: Align(
           alignment: Alignment.center,
           child: Text(
-            'English Alphabet',
+            AppLocalizations.of(context)!.english_alphabets,
             style: GoogleFonts.openSans(
               color: Colors.white,
               fontSize: 24,

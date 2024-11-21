@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:nishabdvaani/Screens/Learning/Maths/Numbers/maths_option.dart';
 import 'package:nishabdvaani/Screens/Learning/letter.dart';
 import 'package:nishabdvaani/Widgets/LearningWidgets/learning_card.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LearningScreen extends StatefulWidget {
   const LearningScreen({super.key});
@@ -23,7 +23,7 @@ class _LearningScreenState extends State<LearningScreen> {
       appBar: AppBar(
         title: Align(
             alignment: Alignment.center,
-            child: Text('Learning Corner', style: GoogleFonts.openSans(fontSize: 28, fontWeight: FontWeight.bold))),
+            child: Text(AppLocalizations.of(context)!.learning_corner, style: GoogleFonts.openSans(fontSize: 28, fontWeight: FontWeight.bold))),
         backgroundColor: Colors.lightBlue[100],
       ),
       body: Padding(
@@ -32,7 +32,7 @@ class _LearningScreenState extends State<LearningScreen> {
           children: [
             const SizedBox(height: 16,),
             Text(
-              'What you want to Learn ?',
+              AppLocalizations.of(context)!.what_you_want_to_learn,
               style: GoogleFonts.openSans(fontSize: 18, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
@@ -44,42 +44,42 @@ class _LearningScreenState extends State<LearningScreen> {
                 shrinkWrap: true,
                 children: [
                   LearningCard(
-                    title: 'Alphabets',
+                    title: AppLocalizations.of(context)!.alphabets,
                     imagePath: 'assets/Tables/alphabets.jpg',
-                    isSelected: _selectedModule == 'Alphabets',
+                    isSelected: _selectedModule ==AppLocalizations.of(context)!.alphabets,
                     onTap: () {
                       setState(() {
-                        _selectedModule  = _selectedModule  == 'Alphabets' ? null : 'Alphabets';
+                        _selectedModule  = _selectedModule  == AppLocalizations.of(context)!.alphabets ? null : AppLocalizations.of(context)!.alphabets;
                       });
                     },
                   ),
                   LearningCard(
-                    title: 'Maths',
+                    title: AppLocalizations.of(context)!.maths,
                     imagePath: 'assets/Tables/number.jpg',
-                    isSelected: _selectedModule  == 'Maths',
+                    isSelected: _selectedModule  == AppLocalizations.of(context)!.maths,
                     onTap: () {
                       setState(() {
-                        _selectedModule  = _selectedModule  == 'Maths' ? null : 'Maths';
+                        _selectedModule  = _selectedModule  == AppLocalizations.of(context)!.maths ? null : AppLocalizations.of(context)!.maths;
                       });
                     },
                   ),
                   LearningCard(
-                    title: 'Science',
+                    title: AppLocalizations.of(context)!.science,
                     imagePath: 'assets/Tables/science.jpg',
-                    isSelected: _selectedModule  == 'Science',
+                    isSelected: _selectedModule  ==  AppLocalizations.of(context)!.science,
                     onTap: () {
                       setState(() {
-                        _selectedModule  = _selectedModule == 'Science' ? null : 'Science';
+                        _selectedModule  = _selectedModule ==  AppLocalizations.of(context)!.science ? null :  AppLocalizations.of(context)!.science;
                       });
                     },
                   ),
                   LearningCard(
-                    title: 'Vocabulary',
+                    title: AppLocalizations.of(context)!.vocabulary,
                     imagePath: 'assets/Tables/vocabulary.png',
-                    isSelected: _selectedModule  == 'Vocabulary',
+                    isSelected: _selectedModule  ==  AppLocalizations.of(context)!.vocabulary,
                     onTap: () {
                       setState(() {
-                        _selectedModule  = _selectedModule  == 'Vocabulary' ? null : 'Vocabulary';
+                        _selectedModule  = _selectedModule  == AppLocalizations.of(context)!.vocabulary ? null : AppLocalizations.of(context)!.vocabulary;
                       });
                     },
                   ),
@@ -90,13 +90,13 @@ class _LearningScreenState extends State<LearningScreen> {
                   onPressed: _selectedModule != null
                     ? () {
                        HapticFeedback.vibrate();
-                    if(_selectedModule=='Alphabets'){
+                    if(_selectedModule== AppLocalizations.of(context)!.alphabets){
                       Navigator.push(context, MaterialPageRoute(
                         builder: (ctx) => const Letter(),
                       ),
                       );
                     }
-                    if(_selectedModule=='Maths'){
+                    if(_selectedModule== AppLocalizations.of(context)!.maths){
                       Navigator.push(context, MaterialPageRoute(
                         builder: (ctx) => const MathsOption(),
                       ),
@@ -107,7 +107,7 @@ class _LearningScreenState extends State<LearningScreen> {
                   }
                 : null,
                   child: Text(
-                    'Continue',
+                    AppLocalizations.of(context)!.continue_text,
                     style: GoogleFonts.openSans(
                       fontSize: 28,
                       color: Colors.black,

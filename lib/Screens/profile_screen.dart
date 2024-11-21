@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nishabdvaani/Screens/score_card.dart';
-
+import 'package:nishabdvaani/Provider/language_provider.dart';
+import 'package:nishabdvaani/Screens/Profile/language_toggle.dart';
+import 'package:nishabdvaani/Widgets/Profile/result_chart.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../Widgets/Profile/streak_calendar_widget.dart';
 
-class ProfileScreen extends StatefulWidget {
+class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  ConsumerState<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
   void _openStreakOverlay() {
     showModalBottomSheet(
@@ -32,21 +35,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
         isScrollControlled: true,
         context: context,
         builder: (ctx) {
+          return FractionallySizedBox(
+            heightFactor: 0.75,
+            child: ResultChart(),
+          );
+        });
+  }
+
+  void _openLanguageChangeOverlay() {
+    showModalBottomSheet(
+        useSafeArea: true,
+        isScrollControlled: true,
+        context: context,
+        builder: (ctx) {
           return const FractionallySizedBox(
             heightFactor: 0.75,
-            child: ScoreCard(),
+            child: LanguageToggle(),
           );
         });
   }
   @override
   Widget build(BuildContext context) {
-
+    final lang = ref.read(languageProvider);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Align(
           alignment: Alignment.center,
-          child: Text('Profile', style: GoogleFonts.openSans(
+          child: Text(AppLocalizations.of(context)!.profile, style: GoogleFonts.openSans(
             fontSize: 26,
             fontWeight: FontWeight.bold,
             color: Colors.black,),
@@ -66,7 +82,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             const SizedBox(height: 15),
             // Name
             Text(
-              'Pankaj Kurmi',
+              AppLocalizations.of(context)!.pankaj_kurmi,
               style: GoogleFonts.openSans(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -76,7 +92,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             const SizedBox(height: 5),
             // Phone or Email
             Text(
-              'Phone number',
+              AppLocalizations.of(context)!.phone_number,
               style: GoogleFonts.openSans(
                 fontSize: 16,
                 color: Colors.grey[600],
@@ -84,7 +100,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             const SizedBox(height: 15),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+              },
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                 backgroundColor: Colors.yellow[700],
@@ -93,7 +110,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               child: Text(
-                'Edit Profile',
+                AppLocalizations.of(context)!.edit_profile,
                 style: GoogleFonts.openSans(
                   fontSize: 18,
                   color: Colors.black,
@@ -103,9 +120,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             const SizedBox(height: 30),
 
-            profileWidgets(Icons.history, 'Streaks', _openStreakOverlay),
-            profileWidgets(Icons.format_list_numbered_sharp, 'ScoreCard', _openScoreCardOverlay),
-            profileWidgets(Icons.settings, 'Settings', _openScoreCardOverlay),
+            profileWidgets(Icons.history, AppLocalizations.of(context)!.streaks, _openStreakOverlay),
+            profileWidgets(Icons.format_list_numbered_sharp,AppLocalizations.of(context)!.scorecard, _openScoreCardOverlay),
+            LanguageToggle(),
+            // profileWidgets(Icons.settings, 'Settings', _openLanguageChangeOverlay),
+
 
             const SizedBox(height: 28,),
             Padding(
@@ -118,7 +137,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       const Icon(Icons.logout, color: Colors.red, size: 30,),
                       const SizedBox(width: 10),
                       Text(
-                        'Logout',
+                        AppLocalizations.of(context)!.logout,
                         style: GoogleFonts.openSans(
                           fontWeight: FontWeight.bold,
                           color: Colors.red,
@@ -138,7 +157,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
 
-  Widget profileWidgets(IconData icon, String title,VoidCallback overlaymain ) {
+  Widget profileWidgets(IconData icon, String title,VoidCallback overlaymain) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 30),
       child: Row(

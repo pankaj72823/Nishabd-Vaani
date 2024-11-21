@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nishabdvaani/Widgets/HomeScreen/swap_card.dart';
 import 'package:swipe_cards/swipe_cards.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Align(
           alignment: Alignment.center,
           child: Text(
-            'NishabdVaani',
+            AppLocalizations.of(context)!.nishabd_vaani,
             style: GoogleFonts.openSans(
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -99,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Column(
                     children: [
                       Text(
-                        'Hi Learner!',
+                        AppLocalizations.of(context)!.hello_learners,
                         style: GoogleFonts.openSans(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -113,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        "It's never too late to start Learning",
+                        AppLocalizations.of(context)!.its_never_too_late,
                         style: GoogleFonts.openSans(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,

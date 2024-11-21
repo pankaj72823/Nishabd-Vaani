@@ -5,6 +5,7 @@ import 'package:nishabdvaani/Screens/conversion.dart';
 import 'package:nishabdvaani/Screens/home_screen.dart';
 import 'package:nishabdvaani/Screens/practice.dart';
 import 'package:nishabdvaani/Screens/profile_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TabsScreen extends StatefulWidget {
   @override
@@ -50,14 +51,14 @@ class _TabsScreenState extends State<TabsScreen> {
           }
         },
         currentIndex: _selectedPageIndex,
-        items: const [
+        items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.school, size: 35),
-            label: 'Learning',
+            label:  AppLocalizations.of(context)!.learning,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.change_circle, size: 35),
-            label: 'Conversion',
+            label: AppLocalizations.of(context)!.conversion,
           ),
           BottomNavigationBarItem(
             icon: SizedBox.shrink(), // Empty to maintain layout, FAB handles the Home icon
@@ -65,11 +66,11 @@ class _TabsScreenState extends State<TabsScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.assignment, size: 35),
-            label: 'Practice',
+            label: AppLocalizations.of(context)!.practice,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person, size: 35),
-            label: 'Profile',
+            label: AppLocalizations.of(context)!.profile,
           ),
         ],
         selectedItemColor: Colors.blue,

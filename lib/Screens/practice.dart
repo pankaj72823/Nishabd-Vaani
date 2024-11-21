@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:nishabdvaani/Screens/classroom_test.dart';
 import 'package:nishabdvaani/Screens/practice_quiz.dart';
 import 'package:nishabdvaani/Widgets/Practice/practice_card.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Practice extends StatefulWidget {
   const Practice({super.key});
@@ -23,7 +24,7 @@ class _PracticeState extends State<Practice> {
         title: Align(
           alignment: Alignment.center,
           child: Text(
-            'Practice',
+            AppLocalizations.of(context)!.practice,
             style: GoogleFonts.openSans(
               fontSize: 28,
               color: Colors.black,
@@ -37,7 +38,7 @@ class _PracticeState extends State<Practice> {
         children: [
           const SizedBox(height: 20),
           Text(
-            "Let's start practice",
+            AppLocalizations.of(context)!.lets_start_practice,
             style: GoogleFonts.openSans(
               fontSize: 20,
               color: Colors.black,
@@ -50,7 +51,7 @@ class _PracticeState extends State<Practice> {
             child: Column(
               children: [
                 PracticeCard(
-                  title: "Writing Practice ",
+                  title:AppLocalizations.of(context)!.writing_practice,
                   imagePath: "assets/Practice_Screen/quiz.gif",
                   isSelected: selectedCardIndex == 0,
                   onTap: () => setState(() {
@@ -63,7 +64,7 @@ class _PracticeState extends State<Practice> {
                 ),
                 const SizedBox(height: 20),
                 PracticeCard(
-                  title: "Classroom test",
+                  title: AppLocalizations.of(context)!.classroom_test,
                   imagePath: "assets/Practice_Screen/test.gif",
                   isSelected: selectedCardIndex == 1,
                   onTap: () => setState(() {
@@ -96,7 +97,7 @@ class _PracticeState extends State<Practice> {
             }
                 : null,
             child: Text(
-              'Continue',
+              AppLocalizations.of(context)!.continue_text,
               style: GoogleFonts.openSans(
                 fontSize: 28,
                 color: Colors.black,
