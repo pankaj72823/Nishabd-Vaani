@@ -7,7 +7,9 @@ import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Question extends ConsumerStatefulWidget{
-  const Question({super.key});
+  const Question({super.key, required this.module});
+
+  final String module;
   @override
   _Question createState() {
     return _Question();
@@ -186,12 +188,18 @@ class _Question extends ConsumerState<Question>{
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                     quiz.difficulty==2 ?
+                                      widget.module == 'alpha' ? quiz.difficulty==2 ?
                                         Text(quiz.question, style: GoogleFonts.openSans(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 30,
                                       ),)
-                                      : Image.network(quiz.question, height: 80, width:150),
+                                      : Image.network(quiz.question, height: 80, width:150)
+                                      :  Expanded(
+                                        child: Text(quiz.question, style: GoogleFonts.openSans(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),),
+                                      ),
 
                                        const SizedBox(width: 8,),
                                     ],
@@ -284,8 +292,19 @@ class _Question extends ConsumerState<Question>{
                         children: [
                           answer_value! ?  Image.asset('assets/Practice_Screen/correct.png', height: 20, width:30)
                           : Image.asset('assets/Practice_Screen/wrong.png', height: 20, width:30 ,),
-                          quiz.difficulty==2 ?  Align(alignment: Alignment.center, child:  Image.network(option, height: 60, width:100)) :
-                          Align(
+                          widget.module == 'alpha' ?
+                          quiz.difficulty==2 ?  Align(alignment: Alignment.center, child:  Image.network(option, height: 60, width:100))
+                              : Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              option,
+                              style: GoogleFonts.openSans(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 24,
+                              ),
+                            ),
+                          )
+                          :  Align(
                             alignment: Alignment.center,
                             child: Text(
                               option,
@@ -300,8 +319,18 @@ class _Question extends ConsumerState<Question>{
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image.asset('assets/Practice_Screen/correct.png', height: 20, width:20),
-                          quiz.difficulty==2 ? Align(alignment: Alignment.center, child:  Image.network(option, height: 60, width:150))
+                          widget.module=='alpha' ? quiz.difficulty==2 ? Align(alignment: Alignment.center, child:  Image.network(option, height: 60, width:150))
                           : Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              option,
+
+                              style: GoogleFonts.openSans(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 24,
+                              ),
+                            ),
+                          ) : Align(
                             alignment: Alignment.center,
                             child: Text(
                               option,
@@ -316,7 +345,7 @@ class _Question extends ConsumerState<Question>{
                       ) : Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          quiz.difficulty==2 ? Align(alignment: Alignment.center, child:  Image.network(option, height: 60, width:150))
+                           widget.module=='alpha' ? quiz.difficulty==2 ? Align(alignment: Alignment.center, child:  Image.network(option, height: 60, width:150))
                               : Align(
                             alignment: Alignment.center,
                             child: Text(
@@ -326,7 +355,17 @@ class _Question extends ConsumerState<Question>{
                                 fontSize: 24,
                               ),
                             ),
-                          ),
+                          ) : Align(
+                             alignment: Alignment.center,
+                             child: Text(
+                               option,
+
+                               style: GoogleFonts.openSans(
+                                 fontWeight: FontWeight.bold,
+                                 fontSize: 24,
+                               ),
+                             ),
+                           ),
                         ],
                       ),
                     ),
@@ -357,9 +396,11 @@ class _Question extends ConsumerState<Question>{
                             });
                           }
                           else{
-                            if(count>7) {
+                            if(count==7) {
+                              await ref.read(QuizProvider.notifier)
+                                  .fetchNextQuestion(answer_value);
                               Navigator.push(context, MaterialPageRoute(
-                                builder: (ctx) => ScoreScreen(score: quiz.score,),
+                                builder: (ctx) => ScoreScreen(score: quiz.score, module: widget.module,),
                               ),
                               );
                             }
@@ -368,6 +409,7 @@ class _Question extends ConsumerState<Question>{
                               toggleButton();
                               updateCurrentQuestion();
                             });
+                              print(count);
                               ref.read(counterProvider.notifier).state++;
                               ref.read(QuizProvider.notifier)
                                   .fetchNextQuestion(answer_value);
@@ -714,9 +756,12 @@ class _Question extends ConsumerState<Question>{
                           setState(() {
                             if(_frozenPairs == [] && _incorrectPairs == [])  _unattempted++;
                           });
-                          if(count>7) {
+                          if(count==7) {
+                            await ref.read(QuizProvider.notifier)
+                                .fetchNextQuestion(answer_value);
+                            // ref.read(counterProvider.notifier).state = 0;
                             Navigator.push(context, MaterialPageRoute(
-                              builder: (ctx) => ScoreScreen(score: score,),
+                              builder: (ctx) => ScoreScreen(score: score, module: widget.module,),
                             ),
                             );
                           }
@@ -728,6 +773,7 @@ class _Question extends ConsumerState<Question>{
                               _incorrectPairs = [];
                               _showMatchAnswer = false;
                             });
+                            print(count);
                             ref
                                 .read(counterProvider.notifier)
                                 .state++;

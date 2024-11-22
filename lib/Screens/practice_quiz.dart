@@ -89,10 +89,24 @@ class _PracticeQuizState extends State<PracticeQuiz> {
                 onPressed: () {
                   if(_selectedQuiz == AppLocalizations.of(context)!.alphabet_practice){
                     Navigator.push(context, MaterialPageRoute(
-                    builder: (ctx) => const StartScreen(),
+                    builder: (ctx) => const StartScreen(module: 'alpha'),
                   ),
                   );
                   }
+                  if(_selectedQuiz == AppLocalizations.of(context)!.maths){
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (ctx) => const StartScreen(module: 'maths'),
+                    ),
+                    );
+                  }
+                  if(_selectedQuiz == AppLocalizations.of(context)!.science){
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (ctx) => const StartScreen(module: 'science'),
+                    ),
+                    );
+                  }
+
+
                 },
                 child: Text(
                   AppLocalizations.of(context)!.continue_text,

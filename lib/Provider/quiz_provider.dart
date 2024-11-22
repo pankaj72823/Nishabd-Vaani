@@ -78,7 +78,7 @@ class MyStatenotifier extends StateNotifier<MyState>{
     MyStatenotifier(this.ref) : super(QuizState.initial());
   
   
-  Future<void>loadQuiz() async{
+  Future<void>loadQuiz(String module) async{
     final ipAddress = ref.watch(ipAddressProvider);
     final token = ref.watch(tokenProvider);
     final cookie = ref.watch(cookieProvider);
@@ -90,13 +90,14 @@ class MyStatenotifier extends StateNotifier<MyState>{
           'Cookie' : '$cookie',
         },
         body: jsonEncode({
-          'module': 'alpha',
+          'module': "$module",
           'number_of_que': 7,
         }),
         Uri.parse('http://$ipAddress:5000/quiz/load-questions')
       );
       final res = response.statusCode;
       print(res);
+
       if(response.statusCode==200){
         final data = jsonDecode(response.body);
         print(data['message']);
@@ -126,6 +127,7 @@ class MyStatenotifier extends StateNotifier<MyState>{
     if(ans==null) ans = false;
     print(ans.runtimeType);
     print(ans);
+    print("Score: ${ref.watch(scoreProvider)}");
     try{
       final response = await http.post(
           headers: {
@@ -143,7 +145,9 @@ class MyStatenotifier extends StateNotifier<MyState>{
       if(response.statusCode==200){
         final data = json.decode(response.body);
         print(data['message']);
-        if(data['question']['difficulty']==3){
+        print("Score final : ${data['score']}");
+        if(ref.watch(counterProvider)==7) ref.read(scoreProvider.notifier).state = data['score'];
+        if(data['question']['difficulty']==3 && data['question']['module']=='alpha'){
           state = MatchState(
               question: data['question']['question'],
               ColumnA: (data['question']['options']['columnA'] as List<dynamic>).cast<String>(),

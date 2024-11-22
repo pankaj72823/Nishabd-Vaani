@@ -5,8 +5,8 @@ import 'package:nishabdvaani/Screens/Practice/Quiz/start_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ScoreScreen extends ConsumerWidget {
-  const ScoreScreen({super.key, required this.score});
-
+  const ScoreScreen({super.key, required this.score, required this.module});
+  final String module;
   final int score;
 
   @override
@@ -195,8 +195,9 @@ class ScoreScreen extends ConsumerWidget {
                   // Refresh Button
                   ElevatedButton(
                     onPressed: () async {
+
                       Navigator.push(context, MaterialPageRoute(
-                          builder: (ctx) => const StartScreen(),
+                          builder: (ctx) =>  StartScreen(module: module,),
                       ),
                       );
                     },

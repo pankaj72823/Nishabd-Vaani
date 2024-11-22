@@ -247,7 +247,7 @@ export async function answerQuestion(req, res) {
 //    console.log(req.body);
 //    console.log(req.user);
     console.log(req.session);
-    console.log(req.headers.cookie);
+//    console.log(req.headers.cookie);
     let { correct } = req.body;
     console.log(typeof(correct));
     console.log(correct);
@@ -301,6 +301,7 @@ export async function answerQuestion(req, res) {
     if (!attemptedQuestions[studentID].includes(selectedQuestion._id)) {
         attemptedQuestions[studentID].push(selectedQuestion._id);
     }
+       console.log(req.session);
     return res.json({
         message: `Question retrieved successfully`,
         question: selectedQuestion,
