@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NumberTable extends StatefulWidget {
   final int multiplier;
@@ -83,7 +84,7 @@ class _NumberTableState extends State<NumberTable> {
                       elevation: 10,
                     ),
                     child: Text(
-                      "Start Table",
+                      AppLocalizations.of(context)!.start,
                       style: TextStyle(fontSize: 22, color: Colors.white),
                     ),
                   ),

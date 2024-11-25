@@ -4,6 +4,9 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:nishabdvaani/Provider/ip_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../Provider/cookie_provider.dart';
+import '../Provider/tokenProvider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TextToSign extends ConsumerStatefulWidget {
   const TextToSign({Key? key}) : super(key: key);
@@ -27,7 +30,17 @@ class _TextToSignState extends ConsumerState<TextToSign> {
 
   Future<void> fetchSignData() async {
     final ipAddress = ref.watch(ipAddressProvider);
-    final response = await http.get(Uri.parse('http://$ipAddress:5000/conversion'));
+    final token = ref.watch(tokenProvider);
+    final cookie = ref.watch(cookieProvider);
+
+    final response = await http.get(
+      headers: {
+        'Authorization': '$token',
+        'Content-Type' : 'application/json',
+        'Cookie' : '$cookie',
+      },
+        Uri.parse('http://$ipAddress:5000/conversion'),
+    );
 
     if (response.statusCode == 200) {
       final List<dynamic> fetchedData = json.decode(response.body);
@@ -51,6 +64,8 @@ class _TextToSignState extends ConsumerState<TextToSign> {
 
   Future<void> _fetchSign() async {
     final ipAddress = ref.watch(ipAddressProvider);
+    final token = ref.watch(tokenProvider);
+    final cookie = ref.watch(cookieProvider);
     print('Fetching starts');
     final String word = _textController.text.trim();
     if (word.isEmpty) {
@@ -65,9 +80,12 @@ class _TextToSignState extends ConsumerState<TextToSign> {
     try {
        print('request sending');
       final response = await http.post(
-      
+        headers: {
+          'Authorization': '$token',
+          'Content-Type' : 'application/json',
+          'Cookie' : '$cookie',
+        },
         Uri.parse('http://$ipAddress:5000/conversion'),
-        headers: {'Content-Type': 'application/json'},
         body: jsonEncode({'word': word}),
       );
       print(response.statusCode);
@@ -102,7 +120,7 @@ class _TextToSignState extends ConsumerState<TextToSign> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
-          'Text to Sign Convertor',
+          AppLocalizations.of(context)!.convert_text_to_sign,
           style: GoogleFonts.openSans(fontSize: 24, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.orange,
@@ -141,7 +159,7 @@ class _TextToSignState extends ConsumerState<TextToSign> {
               child: DropdownButton<String>(
                 value: selectedSign,
                 isExpanded: true,
-                hint: const Text('Dictionary'),
+                hint: Text(AppLocalizations.of(context)!.dictionary),
                 items: filteredSignData.map((data) {
                   return DropdownMenuItem<String>(
                     value: data['sign_name'],
@@ -158,16 +176,16 @@ class _TextToSignState extends ConsumerState<TextToSign> {
             ),
               const SizedBox(height: 16),
               Text(
-                'Enter Word:',
+                AppLocalizations.of(context)!.enter_word,
                 style: GoogleFonts.openSans(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 10),
               TextField(
                 focusNode: _focusNode,
                 controller: _textController,
-                decoration: const InputDecoration(
+                decoration:  InputDecoration(
                   border: OutlineInputBorder(),
-                  hintText: 'Type your Word here...',
+                  hintText: AppLocalizations.of(context)!.type_word,
                 ),
               ),
               SizedBox(height: 32),
@@ -185,13 +203,13 @@ class _TextToSignState extends ConsumerState<TextToSign> {
                   elevation: 5,
                 ),
                 child: Text(
-                  "Get the sign",
+                  AppLocalizations.of(context)!.get_sign,
                   style: TextStyle(fontSize: 18, color: Colors.white),
                 ),
               ),
               const SizedBox(height: 20),
               Text(
-                'Sign Language Output:',
+                AppLocalizations.of(context)!.sign_language_output,
                 style: GoogleFonts.openSans(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 10),
@@ -208,7 +226,7 @@ class _TextToSignState extends ConsumerState<TextToSign> {
                   children:[ _gifUrl != null
                       ? Image.network(_gifUrl!, height: 250, width: 200,)
                       : Text(
-                    _errorMessage ?? 'Sign will be shown here',
+                    _errorMessage ??AppLocalizations.of(context)!.sign_will_be_shown,
                     style: GoogleFonts.openSans(
                       fontSize: 16,
                       color: Colors.black,
@@ -229,100 +247,3 @@ class _TextToSignState extends ConsumerState<TextToSign> {
   }
 }
 
-
-
-
-//
-// import 'package:flutter/material.dart';
-// import 'package:google_fonts/google_fonts.dart';
-//
-//
-// class TextToSign extends StatelessWidget {
-//   const TextToSign({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: Colors.white,
-//       appBar: AppBar(
-//           title: Text('Text to Sign Convertor',style:GoogleFonts.openSans(fontSize: 24, fontWeight: FontWeight.bold),),
-//           backgroundColor: Colors.orange
-//       ),
-//       body: SingleChildScrollView(
-//         child: Padding(
-//           padding: const EdgeInsets.all(16.0),
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//               SizedBox(height: 40),
-//               Container(
-//                 height: 150,
-//                 decoration: BoxDecoration(
-//                   borderRadius: BorderRadius.circular(12),
-//                   image: DecorationImage(
-//                     image: AssetImage('assets/Conversion/texttosign.gif'),
-//                     fit: BoxFit.cover,
-//                   ),
-//                 ),
-//               ),
-//               const SizedBox(height: 48),
-//               Text(
-//                 'Enter Word:',
-//                 style:GoogleFonts.openSans(fontSize: 18, fontWeight: FontWeight.bold),
-//               ),
-//
-//               const SizedBox(height: 10),
-//               const TextField(
-//                 decoration: InputDecoration(
-//                   border: OutlineInputBorder(),
-//                   hintText: 'Type your Word here...',
-//                 ),
-//               ),
-//               SizedBox(height: 32),
-//               ElevatedButton(
-//                 onPressed: () {},
-//                 style: ElevatedButton.styleFrom(
-//                   backgroundColor: Colors.orangeAccent,
-//                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-//                   shape: RoundedRectangleBorder(
-//                     borderRadius: BorderRadius.circular(30.0),
-//                   ),
-//                   elevation: 5,
-//                 ),
-//                 child: Text(
-//                   "Get the sign",
-//                   style: TextStyle(fontSize: 18, color: Colors.white),
-//                 ),
-//               ),
-//               const SizedBox(height: 20,),
-//               Text(
-//                 'Sign Language Output:',
-//                 style: GoogleFonts.openSans(fontSize: 18, fontWeight: FontWeight.bold),
-//               ),
-//               SizedBox(height: 10),
-//               Container(
-//                 padding: EdgeInsets.all(16.0),
-//                 width: double.infinity,
-//                 height: 150,
-//                 decoration: BoxDecoration(
-//                   color: Colors.white,
-//                   borderRadius: BorderRadius.circular(8.0),
-//                 ),
-//                 child: Center(
-//                   child: Text(
-//                     'Sign will be shown here',
-//                     style: GoogleFonts.openSans(
-//                       fontSize: 16,
-//                       color: Colors.black,
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//               const SizedBox(height: 20),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }

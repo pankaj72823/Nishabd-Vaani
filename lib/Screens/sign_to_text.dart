@@ -9,6 +9,10 @@ import 'dart:math';
 import 'package:nishabdvaani/Provider/ip_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../Provider/cookie_provider.dart';
+import '../Provider/tokenProvider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class SignToText extends ConsumerStatefulWidget {
   const SignToText({super.key});
 
@@ -54,10 +58,20 @@ class _SignToTextState extends ConsumerState<SignToText> {
   }
 
   Future<void> _startWebSocket() async {
+
     final ipAddress = ref.watch(ipAddressProvider);
+    final token = ref.watch(tokenProvider);
+    final cookie = ref.watch(cookieProvider);
     try {
       final response =
-      await http.get(Uri.parse('http://$ipAddress:5000/start-websocket'));
+      await http.get(
+        headers: {
+          'Authorization': '$token',
+          'Content-Type' : 'application/json',
+          'Cookie' : '$cookie',
+        },
+          Uri.parse('http://$ipAddress:5000/start-websocket'),
+      );
       final message = response.body;
 
       if (message.contains('WebSocket connection is now active.')) {
@@ -175,7 +189,7 @@ class _SignToTextState extends ConsumerState<SignToText> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.orange,
-        title: Text('Sign to Text', style: GoogleFonts.openSans()),
+        title: Text(AppLocalizations.of(context)!.sign_to_text, style: GoogleFonts.openSans()),
         actions: [
           IconButton(
             icon: const Icon(Icons.switch_camera),
@@ -217,7 +231,7 @@ class _SignToTextState extends ConsumerState<SignToText> {
                     elevation: 5,
                   ),
                   child: Text(
-                    'Start Detection',
+                    AppLocalizations.of(context)!.start_detection,
                     style: GoogleFonts.openSans(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -239,7 +253,7 @@ class _SignToTextState extends ConsumerState<SignToText> {
                     elevation: 5,
                   ),
                   child: Text(
-                    'Stop Detection',
+                    AppLocalizations.of(context)!.stop_detection,
                     style: GoogleFonts.openSans(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -252,8 +266,8 @@ class _SignToTextState extends ConsumerState<SignToText> {
             const SizedBox(height: 40),
             Text(
               _gesture != null
-                  ? 'Recognized Gesture: $_gesture'
-                  : 'Waiting for gesture...',
+                  ? "${AppLocalizations.of(context)!.recognized_gesture} : $_gesture"
+                  : AppLocalizations.of(context)!.waiting_for_gesture,
               style: GoogleFonts.openSans(
                   fontSize: 24, fontWeight: FontWeight.w600),
               textAlign: TextAlign.center,

@@ -217,8 +217,12 @@ export function retrieveQuestion(req, studentID, difficulty) {
 
 // Start quiz session and load questions
 export async function startQuizSession(req, res) {
+    console.log(req.headers.cookie);
     const { module, number_of_que } = req.body;
     const studentID = req.user._id;
+    console.log(studentID);
+    console.log(req.session);
+    console.log(req.body);
     if (!module) return res.status(400).send('Invalid module specified');
     req.session.module = { [studentID]: module };
     req.session.number_of_que = { [studentID]: number_of_que };
@@ -245,14 +249,17 @@ export async function startQuizSession(req, res) {
 // Handle answer correctness and retrieve next question
 export async function answerQuestion(req, res) {
     let { correct } = req.body;
-    if(typeof(correct)== "string"){
-        correct = Boolean(correct);
-    }
+       if (typeof(correct) == "string") {
+           correct = correct.toLowerCase() === "false" ? false : Boolean(correct);
+       }
     const studentID = req.user._id;
     const student = await Student.findById(studentID);
     if (!student) throw new Error('Student not found');
     let currentDifficulty = req.session.currentDifficulty[studentID] || 1;
+    console.log(correct);
+
     if (correct !== undefined) {
+        console.log(correct);
         currentDifficulty = updateStreakAndDifficulty(req, student, req.session.module[studentID], correct);
     }
     req.session.currentDifficulty[studentID] = currentDifficulty;
@@ -288,6 +295,7 @@ export async function answerQuestion(req, res) {
     if (!attemptedQuestions[studentID].includes(selectedQuestion._id)) {
         attemptedQuestions[studentID].push(selectedQuestion._id);
     }
+       console.log(req.session);
     return res.json({
         message: `Question retrieved successfully`,
         question: selectedQuestion,

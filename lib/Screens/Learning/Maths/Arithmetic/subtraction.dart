@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Subtraction extends StatefulWidget {
   @override
@@ -49,7 +50,7 @@ class _SubtractionState extends State<Subtraction> {
         title: Align(
           alignment: Alignment.center,
           child: Text(
-            'Subtraction',
+            AppLocalizations.of(context)!.subtraction,
             style: GoogleFonts.openSans(
               fontWeight: FontWeight.bold,
               fontSize: 26,
@@ -102,7 +103,7 @@ class _SubtractionState extends State<Subtraction> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Example',
+                    AppLocalizations.of(context)!.example,
                     style: GoogleFonts.openSans(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -116,7 +117,6 @@ class _SubtractionState extends State<Subtraction> {
                     child: Padding(
                       padding: EdgeInsets.all(8),
                       child: Image.asset(
-
                         'assets/Learning/subtract_example.webp',
                         width: screenWidth, // Adjust based on screen width
                       ),

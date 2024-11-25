@@ -4,10 +4,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nishabdvaani/Provider/quiz_provider.dart';
 import 'package:nishabdvaani/Screens/Practice/Quiz/question.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class StartScreen extends ConsumerWidget {
-  const StartScreen({super.key});
+   const StartScreen({super.key, required this.module});
 
+  final String module;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
@@ -33,7 +35,7 @@ class StartScreen extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "It's Quiz Time!",
+                    AppLocalizations.of(context)!.quiz_time,
                     style: GoogleFonts.poppins(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
@@ -43,22 +45,24 @@ class StartScreen extends ConsumerWidget {
                   const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () async {
-                        await ref.read(QuizProvider.notifier).loadQuiz();
+                        await ref.read(QuizProvider.notifier).loadQuiz(module);
+                        ref.read(counterProvider.notifier).state = 0;
+                        ref.read(counterProvider.notifier).state++;
                         Navigator.push(context, MaterialPageRoute(
-                        builder: (ctx) => const Question(),
+                        builder: (ctx) => Question(module: module),
                         ),
                         );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue.shade700,
-                      padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
                       elevation: 10,
                     ),
                     child: Text(
-                      'Start Quiz',
+                      AppLocalizations.of(context)!.start_quiz,
                       style: GoogleFonts.poppins(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,

@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nishabdvaani/Screens/sign_to_text.dart';
 import 'package:nishabdvaani/Screens/text_to_sign.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ConversionCard extends StatelessWidget {
   final String imagePath;
@@ -59,11 +59,11 @@ class ConversionCard extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 16.0),
+          const SizedBox(height: 8.0),
           ElevatedButton(
             onPressed: () {
               HapticFeedback.heavyImpact();
-              if(title== 'Sign to Text') {
+              if(title== AppLocalizations.of(context)!.sign_to_text) {
                 Navigator.push(context, MaterialPageRoute(
                     builder: (ctx) => SignToText(),
                 ),
@@ -77,7 +77,7 @@ class ConversionCard extends StatelessWidget {
               }
             },
             child: Text(
-              'Start',
+              AppLocalizations.of(context)!.start,
               style: GoogleFonts.openSans(
                 fontSize: 16,
                 color: Colors.black,

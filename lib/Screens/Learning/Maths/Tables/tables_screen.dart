@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:nishabdvaani/Screens/Learning/Maths/Tables/table.dart';
 
 import '../../../../Widgets/LearningWidgets/table_card.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TablesScreen extends StatefulWidget {
   const TablesScreen({super.key});
@@ -29,7 +30,7 @@ class _TablesScreenState extends State<TablesScreen> {
       appBar: AppBar(
         title:
             Text(
-              'Tables',
+              AppLocalizations.of(context)!.tables,
               style: GoogleFonts.openSans(
                   color: Colors.white, fontWeight: FontWeight.bold, fontSize: 26),
             ),
@@ -120,7 +121,7 @@ class _TablesScreenState extends State<TablesScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 30.0),
               ),
               child: Text(
-                'Continue',
+                AppLocalizations.of(context)!.continue_text,
                 style: GoogleFonts.openSans(
                   fontSize: 18,
                   color: Colors.white,

@@ -3,6 +3,9 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nishabdvaani/Provider/ip_provider.dart';
+import 'package:nishabdvaani/Provider/tokenProvider.dart';
+
+import 'cookie_provider.dart';
 
 final GujaratialphabetProvider = StateNotifierProvider<GujaratiAlphabetNotifier, GujaratiAlphabetState>((ref) {
   return GujaratiAlphabetNotifier(ref);
@@ -59,8 +62,15 @@ class GujaratiAlphabetNotifier extends StateNotifier<GujaratiAlphabetState> {
 
   Future<void> fetchNextGujaratiAlphabet() async {
     final ipAddress = ref.watch(ipAddressProvider);
+    final token = ref.watch(tokenProvider);
+    final cookie = ref.watch(cookieProvider);
     try {
       final response = await http.get(
+          headers: {
+            'Authorization': '$token',
+            'Content-Type' : 'application/json',
+            'Cookie' : '$cookie',
+          },
           Uri.parse('http://$ipAddress:5000/learning/alphabetGuj/next'));
 
       if (response.statusCode == 200) {
@@ -99,8 +109,15 @@ class GujaratiAlphabetNotifier extends StateNotifier<GujaratiAlphabetState> {
 
   Future<void> fetchPreviousGujaratiAlphabet() async {
     final ipAddress = ref.watch(ipAddressProvider);
+    final token = ref.watch(tokenProvider);
+    final cookie = ref.watch(cookieProvider);
     try {
       final response = await http.get(
+          headers: {
+            'Authorization': '$token',
+            'Content-Type' : 'application/json',
+            'Cookie' : '$cookie',
+          },
           Uri.parse('http://$ipAddress:5000/learning/alphabetGuj/prev'));
 
       if (response.statusCode == 200) {

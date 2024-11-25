@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nishabdvaani/Screens/Learning/EnglishAlphabet/correct_english.dart';
 import 'package:nishabdvaani/Screens/Learning/EnglishAlphabet/incorrect_english.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class QuestionEnglish extends StatefulWidget {
   final String question;
@@ -53,7 +54,7 @@ class _QuestionEnglishState extends State<QuestionEnglish> {
         title: Align(
           alignment: Alignment.center,
           child: Text(
-            'Quiz Time',
+            AppLocalizations.of(context)!.quiz_time,
             style: GoogleFonts.openSans(
               fontSize: 28,
               fontWeight: FontWeight.bold,
@@ -73,7 +74,7 @@ class _QuestionEnglishState extends State<QuestionEnglish> {
             ),
             SizedBox(height: 20),
             Text(
-              'Guess the Sign of the letter',
+              AppLocalizations.of(context)!.quiz_guess_sign,
               style: GoogleFonts.openSans(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 20),
@@ -114,7 +115,7 @@ class _QuestionEnglishState extends State<QuestionEnglish> {
                   : () {
                       _checkAnswer(context);
                     },
-              child: Text('Answer',style: GoogleFonts.openSans(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),),
+              child: Text(AppLocalizations.of(context)!.answer,style: GoogleFonts.openSans(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),),
               style: ElevatedButton.styleFrom(
                 backgroundColor: _selectedOption == null
                     ? Colors.white

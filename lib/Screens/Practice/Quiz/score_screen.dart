@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nishabdvaani/Screens/Practice/Quiz/start_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ScoreScreen extends StatelessWidget{
-  const ScoreScreen({super.key});
+class ScoreScreen extends ConsumerWidget {
+  const ScoreScreen({super.key, required this.score, required this.module});
+  final String module;
+  final int score;
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref){
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -16,17 +22,18 @@ class ScoreScreen extends StatelessWidget{
                 width: 400,
                 child: Stack(
                   children: [
+                    // Score Display Card
                     Container(
                       height: 340,
                       width: 420,
                       decoration: BoxDecoration(
                         gradient: const LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              Colors.blue,
-                              Colors.lightBlueAccent,
-                            ]
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Colors.blue,
+                            Colors.lightBlueAccent,
+                          ],
                         ),
                         borderRadius: BorderRadius.circular(20),
                       ),
@@ -40,16 +47,14 @@ class ScoreScreen extends StatelessWidget{
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Align(
-                                alignment: Alignment.center,
-                                child: Text('Alphabet Score',
-                                  style: GoogleFonts.openSans(
-
+                              Text(
+                                AppLocalizations.of(context)!.alphabet_score,
+                                style: GoogleFonts.openSans(
                                   fontSize: 24,
                                 ),
-                                ),
                               ),
-                              Text('70',
+                              Text(
+                                "$score",
                                 style: GoogleFonts.openSans(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20,
@@ -62,142 +67,121 @@ class ScoreScreen extends StatelessWidget{
                     ),
                     Positioned(
                       top: 280,
-                        left: 28,
-                        child: Padding(
-                          padding: const EdgeInsets.all(24.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            height: 200,
-                            width: 300,
-
-                            child: Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      left: 28,
+                      child: Padding(
+                        padding: const EdgeInsets.all(24.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          height: 200,
+                          width: 300,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      height: 15,
+                                      width: 15,
+                                      decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.blueAccent,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 8),
+                                    Text(
+                                      '7',
+                                      style: GoogleFonts.openSans(
+                                        fontSize: 24,
+                                        color: Colors.blueAccent,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 8),
+                                Center(
+                                  child: Text(
+                                    AppLocalizations.of(context)!.total_questions,
+                                    style: GoogleFonts.openSans(
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+                                Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
                                       children: [
-                                        Row(
-                                          children: [
-                                            Container(
-                                              height: 15,
-                                              width: 15,
-                                              decoration: const BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: Colors.blueAccent,
-                                              ),
-                                            ),
-                                            Text('100%',
-                                              style: GoogleFonts.openSans(
-                                                fontSize: 24,
-                                                color: Colors.blueAccent,
-                                            ),
-                                            ),
-                                          ]
+                                        Container(
+                                          height: 15,
+                                          width: 15,
+                                          decoration: const BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: Colors.green,
+                                          ),
                                         ),
-                                        Row(
-                                            children: [
-                                              Container(
-                                                height: 15,
-                                                width: 15,
-                                                decoration: const BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  color: Colors.blueAccent,
-                                                ),
-                                              ),
-                                              Text('10',
-                                                style: GoogleFonts.openSans(
-                                                  fontSize: 24,
-                                                  color: Colors.blueAccent,
-                                                ),
-                                              ),
-                                            ]
+                                        const SizedBox(width: 8),
+                                        Text(
+                                          '$score',
+                                          style: GoogleFonts.openSans(
+                                            fontSize: 24,
+                                            color: Colors.green,
+                                          ),
                                         ),
                                       ],
                                     ),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text('Completion',
-                                        style: GoogleFonts.openSans(
-                                          fontSize: 18,
+                                    Row(
+                                      children: [
+                                        Container(
+                                          height: 15,
+                                          width: 15,
+                                          decoration: const BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: Colors.red,
+                                          ),
                                         ),
-                                      ),
-                                      Text('Total Questions',
-                                        style: GoogleFonts.openSans(
-                                          fontSize: 16,
+                                        const SizedBox(width: 8),
+                                        Text(
+                                          '${7 - score}',
+                                          style: GoogleFonts.openSans(
+                                            fontSize: 24,
+                                            color: Colors.red,
+                                          ),
                                         ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 8),
+                                Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      AppLocalizations.of(context)!.correct,
+                                      style: GoogleFonts.openSans(
+                                        fontSize: 16,
                                       ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 16,),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                          children: [
-                                            Container(
-                                              height: 15,
-                                              width: 15,
-                                              decoration: const BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: Colors.green,
-                                              ),
-                                            ),
-                                            Text('05',
-                                              style: GoogleFonts.openSans(
-                                                fontSize: 24,
-                                                color: Colors.green,
-                                              ),
-                                            ),
-                                          ]
+                                    ),
+                                    Text(
+                                      AppLocalizations.of(context)!.wrong,
+                                      style: GoogleFonts.openSans(
+                                        fontSize: 16,
                                       ),
-                                      Row(
-                                          children: [
-                                            Container(
-                                              height: 15,
-                                              width: 15,
-                                              decoration: const BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: Colors.red,
-                                              ),
-                                            ),
-                                            Text('02',
-                                              style: GoogleFonts.openSans(
-                                                fontSize: 24,
-                                                color: Colors.red,
-                                              ),
-                                            ),
-                                          ]
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text('Correct',
-                                        style: GoogleFonts.openSans(
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                      Text('Wrong',
-                                        style: GoogleFonts.openSans(
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
                         ),
+                      ),
                     ),
                   ],
                 ),
@@ -206,53 +190,36 @@ class ScoreScreen extends StatelessWidget{
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 60),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 60,
-                          width: 60,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.green,
-                          ),
-                          child: Icon(Icons.refresh,color: Colors.white, size: 50,),
-                        ),
+                  // Refresh Button
+                  ElevatedButton(
+                    onPressed: () async {
 
-                      ]
-                  ),
-                  Row(
-                      children: [
-                        Container(
-                          height: 60,
-                          width: 60,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.green,
-                          ),
-                          child: Icon(Icons.visibility_outlined,color: Colors.white, size: 40,),
-                        ),
-                      ]
-                  ),
-                ],
-              ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 48),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('Play again',
-                    style: GoogleFonts.openSans(
-                      fontSize: 18,
+                      Navigator.push(context, MaterialPageRoute(
+                          builder: (ctx) =>  StartScreen(module: module,),
+                      ),
+                      );
+                    },
+                    child: Container(
+                      height: 60,
+                      width: 60,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.green,
+                      ),
+                      child: const Icon(
+                        Icons.refresh,
+                        color: Colors.white,
+                        size: 50,
+                      ),
                     ),
                   ),
-                  Text('Responses',
+                  const SizedBox(width: 48),
+                  Text(
+                    AppLocalizations.of(context)!.play_again,
                     style: GoogleFonts.openSans(
-                      fontSize: 16,
+                      fontSize: 18,
                     ),
                   ),
                 ],
@@ -263,5 +230,4 @@ class ScoreScreen extends StatelessWidget{
       ),
     );
   }
-
 }

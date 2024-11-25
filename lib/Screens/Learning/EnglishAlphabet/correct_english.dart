@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:nishabdvaani/Provider/alphabet_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nishabdvaani/Screens/Learning/EnglishAlphabet/english_alphabet.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class CorrectEnglish extends ConsumerWidget {
   final String selectedOption;
   final String answer;
@@ -20,7 +22,7 @@ class CorrectEnglish extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Correct',
+                AppLocalizations.of(context)!.correct,
                 style: GoogleFonts.openSans(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -31,7 +33,7 @@ class CorrectEnglish extends ConsumerWidget {
               Image.asset('assets/Learning/correct.png'), // Add your image here
               const SizedBox(height: 20),
               Text(
-                'Hurray! You got it correct',
+                AppLocalizations.of(context)!.hurray_correct,
                 style: TextStyle(fontSize: 18),
               ),
               SizedBox(height: 40),
@@ -47,7 +49,7 @@ class CorrectEnglish extends ConsumerWidget {
                     );
                   });
                 },
-                child: Text('Continue',  style: GoogleFonts.openSans(
+                child: Text(AppLocalizations.of(context)!.continue_text,  style: GoogleFonts.openSans(
                   color: Colors.white,
                   fontSize: 24,
                   fontWeight: FontWeight.bold,

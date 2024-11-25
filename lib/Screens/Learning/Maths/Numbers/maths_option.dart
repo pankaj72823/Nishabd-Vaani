@@ -6,8 +6,7 @@ import 'dart:convert';
 import 'package:nishabdvaani/Provider/numbers_provider.dart';
 import 'package:nishabdvaani/Screens/Learning/Maths/Arithmetic/arithmetic_operations.dart';
 import 'package:nishabdvaani/Screens/Learning/Maths/Numbers/numbers.dart';
-
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../Widgets/LearningWidgets/maths_card.dart';
 import '../Tables/tables_screen.dart';
 
@@ -59,7 +58,7 @@ class _MathsOptionState extends ConsumerState<MathsOption > {
         title: Align(
           alignment: Alignment.center,
           child: Text(
-            'Maths',
+            AppLocalizations.of(context)!.maths,
             style: GoogleFonts.openSans(
               fontSize: 28,
               color: Colors.black,
@@ -73,7 +72,7 @@ class _MathsOptionState extends ConsumerState<MathsOption > {
         children: [
           const SizedBox(height: 20),
           Text(
-            "Start with basics",
+            AppLocalizations.of(context)!.start_with_basics,
             style: GoogleFonts.openSans(
               fontSize: 20,
               color: Colors.black,
@@ -86,7 +85,7 @@ class _MathsOptionState extends ConsumerState<MathsOption > {
             child: Column(
               children: [
                 MathsCard(
-                  title: "Numbers",
+                  title: AppLocalizations.of(context)!.numbers,
                   imagePath: "assets/Tables/number.jpg",
                   isSelected: selectedCardIndex == 0,
                   onTap: () => setState(() {
@@ -99,7 +98,7 @@ class _MathsOptionState extends ConsumerState<MathsOption > {
                 ),
                 const SizedBox(height: 32),
                 MathsCard(
-                  title: "Tables",
+                  title: AppLocalizations.of(context)!.tables,
                   imagePath: "assets/Tables/table.png",
                   isSelected: selectedCardIndex == 1,
                   onTap: () => setState(() {
@@ -112,7 +111,7 @@ class _MathsOptionState extends ConsumerState<MathsOption > {
                 ),
                 const SizedBox(height: 32),
                 MathsCard(
-                  title: "Arithmetic",
+                  title: AppLocalizations.of(context)!.arithmetic,
                   imagePath: "assets/Tables/arithmetic.jpg",
                   isSelected: selectedCardIndex == 2,
                   onTap: () => setState(() {
@@ -151,7 +150,7 @@ class _MathsOptionState extends ConsumerState<MathsOption > {
                 : null,
 
             child: Text(
-              'Continue',
+              AppLocalizations.of(context)!.continue_text,
               style: GoogleFonts.openSans(
                 fontSize: 28,
                 color: Colors.black,

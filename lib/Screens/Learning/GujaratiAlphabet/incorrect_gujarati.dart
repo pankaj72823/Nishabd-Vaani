@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:nishabdvaani/Provider/gujarati_alphabet_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nishabdvaani/Screens/Learning/GujaratiAlphabet/gujarati_alphabet.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class IncorrectGujarati extends ConsumerWidget {
   final String selectedOption;
@@ -20,7 +21,7 @@ class IncorrectGujarati extends ConsumerWidget {
           child: Column(
             children: [
               Text(
-                'Wrong',
+                AppLocalizations.of(context)!.wrong,
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
@@ -31,11 +32,11 @@ class IncorrectGujarati extends ConsumerWidget {
               Image.asset('assets/Learning/incorrect.png', height: 200,), // Add your image here
               SizedBox(height: 20),
               Text(
-                'Oo wrong answer',
+                AppLocalizations.of(context)!.wrong_answer,
                 style: TextStyle(fontSize: 18),
               ),
               Text(
-                'Correct answer is:',
+                AppLocalizations.of(context)!.correct_answer,
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               Image.network(answer, width: 300, height: 200,),
@@ -55,7 +56,7 @@ class IncorrectGujarati extends ConsumerWidget {
                     );
                   });
                     },
-                    child: Text('Next', style: GoogleFonts.openSans(color: Colors.white,fontSize: 20, fontWeight: FontWeight.bold,),),
+                    child: Text(AppLocalizations.of(context)!.next, style: GoogleFonts.openSans(color: Colors.white,fontSize: 20, fontWeight: FontWeight.bold,),),
                     style: ElevatedButton.styleFrom(
                     backgroundColor:Colors.red,
                     textStyle: TextStyle(fontSize: 16),

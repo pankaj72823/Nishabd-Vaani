@@ -1,9 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-class HomeScreen extends StatelessWidget {
+import 'package:nishabdvaani/Widgets/HomeScreen/swap_card.dart';
+import 'package:swipe_cards/swipe_cards.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  late MatchEngine _matchEngine;
+  late List<SwipeItem> _swipItems = [];
+
+  @override
+  void initState(){
+    contents.forEach((content){
+      var swipeItem = SwipeItem(content: content);
+      _swipItems.add(swipeItem);
+    });
+    _matchEngine = MatchEngine(swipeItems: _swipItems );
+    super.initState();
+  }
+  void _onStackFinished(){
+    contents.forEach((content){
+      var swipeItem = SwipeItem(content: content);
+      _swipItems.add(swipeItem);
+    });
+    setState(() {
+      _matchEngine = MatchEngine(swipeItems: _swipItems);
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +44,7 @@ class HomeScreen extends StatelessWidget {
         title: Align(
           alignment: Alignment.center,
           child: Text(
-            'NishabdVaani',
+            AppLocalizations.of(context)!.nishabd_vaani,
             style: GoogleFonts.openSans(
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -39,10 +67,27 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-                  Image.asset(
-                    'assets/Home_Screen/card.png',
-                    height: 300,
+              Container(
+                height: 400,
+                width: 200,
+                padding: const  EdgeInsets.symmetric(vertical: 50, horizontal: 20),
+                child: Center(
+                  child: SwipeCards(
+                      matchEngine: _matchEngine,
+                      onStackFinished: _onStackFinished,
+                      itemBuilder: (BuildContext context, int index){
+                        final item = contents[index % contents.length];
+                        return Image.asset(
+                          item.image,
+                        );
+                      },
                   ),
+                ),
+              ),
+                  // Image.asset(
+                  //   'assets/Home_Screen/card.png',
+                  //   height: 300,
+                  // ),
               Card(
                 color: Colors.white,
                 shadowColor: Colors.grey,
@@ -54,7 +99,7 @@ class HomeScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        'Hi Learner!',
+                        AppLocalizations.of(context)!.hello_learners,
                         style: GoogleFonts.openSans(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -68,7 +113,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        "It's never too late to start Learning",
+                        AppLocalizations.of(context)!.its_never_too_late,
                         style: GoogleFonts.openSans(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,

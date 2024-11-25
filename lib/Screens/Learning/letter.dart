@@ -5,12 +5,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:nishabdvaani/Provider/ip_provider.dart';
 import 'dart:convert';
-
 import 'package:nishabdvaani/Screens/Learning/EnglishAlphabet/english_alphabet.dart';
 import 'package:nishabdvaani/Screens/Learning/GujaratiAlphabet/gujarati_alphabet.dart';
 import '../../Provider/alphabet_provider.dart';
+import '../../Provider/cookie_provider.dart';
 import '../../Provider/gujarati_alphabet_provider.dart';
+import '../../Provider/tokenProvider.dart';
 import '../../Widgets/LearningWidgets/letter_card.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Letter extends ConsumerStatefulWidget {
   const Letter({super.key});
@@ -24,7 +26,16 @@ class _LetterState extends ConsumerState<Letter> {
 
   void fetchFirstEnglishAlphabet() async {
     final ipAddress = ref.watch(ipAddressProvider);
-    final response = await http.get(Uri.parse('http://$ipAddress:5000/learning/alphabetEng'));
+    final token = ref.watch(tokenProvider);
+    final cookie = ref.watch(cookieProvider);
+    final response = await http.get(
+        headers: {
+          'Authorization': '$token',
+          'Content-Type' : 'application/json',
+          'Cookie' : '$cookie',
+        },
+        Uri.parse('http://$ipAddress:5000/learning/alphabetEng')
+    );
     print(response.statusCode);
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
@@ -54,7 +65,16 @@ class _LetterState extends ConsumerState<Letter> {
 
   void fetchFirstGujaratiAlphabet() async {
     final ipAddress = ref.watch(ipAddressProvider);
-    final response = await http.get(Uri.parse('http://$ipAddress:5000/learning/alphabetGuj'));
+    final token = ref.watch(tokenProvider);
+    final cookie = ref.watch(cookieProvider);
+    final response = await http.get(
+        headers: {
+          'Authorization': '$token',
+          'Content-Type' : 'application/json',
+          'Cookie' : '$cookie',
+        },
+        Uri.parse('http://$ipAddress:5000/learning/alphabetGuj')
+    );
     print(response.statusCode);
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
@@ -89,7 +109,7 @@ class _LetterState extends ConsumerState<Letter> {
         title: Align(
           alignment: Alignment.center,
           child: Text(
-            'Alphabets',
+            AppLocalizations.of(context)!.alphabets,
             style: GoogleFonts.openSans(
               fontSize: 28,
               color: Colors.black,
@@ -103,7 +123,7 @@ class _LetterState extends ConsumerState<Letter> {
         children: [
           const SizedBox(height: 20),
           Text(
-            "Start with basics",
+            AppLocalizations.of(context)!.start_with_basics,
             style: GoogleFonts.openSans(
               fontSize: 20,
               color: Colors.black,
@@ -116,7 +136,7 @@ class _LetterState extends ConsumerState<Letter> {
             child: Column(
               children: [
                 LetterCard(
-                  title: "English Alphabets",
+                  title: AppLocalizations.of(context)!.english_alphabets,
                   imagePath: "assets/Learning/alphabet.png",
                   isSelected: selectedCardIndex == 0,
                   onTap: () => setState(() {
@@ -129,7 +149,7 @@ class _LetterState extends ConsumerState<Letter> {
                 ),
                 const SizedBox(height: 20),
                 LetterCard(
-                  title: "Gujarati Alphabets",
+                  title:AppLocalizations.of(context)!.gujarati_alphabets,
                   imagePath: "assets/Learning/gujarati_alphabet.png",
                   isSelected: selectedCardIndex == 1,
                   onTap: () => setState(() {
@@ -168,7 +188,7 @@ class _LetterState extends ConsumerState<Letter> {
               elevation: 8,
             ),
             child: Text(
-              'Continue',
+              AppLocalizations.of(context)!.continue_text,
               style: GoogleFonts.openSans(
                 fontSize: 28,
                 color: Colors.black,

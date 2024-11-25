@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:nishabdvaani/Widgets/Conversion/conversion_card.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Conversion extends StatelessWidget {
   const Conversion({super.key});
@@ -12,7 +12,7 @@ class Conversion extends StatelessWidget {
     appBar: AppBar(
       title: Align(
         alignment: Alignment.center,
-        child: Text('Conversion Tool', style: GoogleFonts.openSans(
+        child: Text(AppLocalizations.of(context)!.conversion_tool, style: GoogleFonts.openSans(
         fontSize: 24,
         fontWeight: FontWeight.bold,
         color: Colors.black,),
@@ -20,21 +20,21 @@ class Conversion extends StatelessWidget {
       ),
     backgroundColor: Colors.lightBlue[100],
     ),
-    body: const Padding(
-      padding: EdgeInsets.all(32.0),
+    body: Padding(
+      padding: const EdgeInsets.all(32.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           ConversionCard(
             imagePath: 'assets/Conversion/signtotext.gif',
-            title: 'Sign to Text',
-            description: 'Convert sign language gestures into text.',
+            title: AppLocalizations.of(context)!.sign_to_text,
+            description: AppLocalizations.of(context)!.convert_sign_language,
           ),
-          SizedBox(height: 40.0),
+          const SizedBox(height: 40.0),
           ConversionCard(
             imagePath: 'assets/Conversion/texttosign.gif',
-            title: 'Text to Sign',
-            description: 'Convert written text into sign language .',
+            title: AppLocalizations.of(context)!.text_to_sign,
+            description:AppLocalizations.of(context)!.text_to_sign,
           ),
         ],
       ),

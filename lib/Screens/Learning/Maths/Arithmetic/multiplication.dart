@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Multiplication extends StatefulWidget {
   @override
@@ -49,7 +50,7 @@ class _MultiplicationState extends State<Multiplication> {
         title: Align(
           alignment: Alignment.center,
           child: Text(
-            'Multiplication',
+            AppLocalizations.of(context)!.multiplication,
             style: GoogleFonts.openSans(
               fontWeight: FontWeight.bold,
               fontSize: 26,
@@ -102,7 +103,7 @@ class _MultiplicationState extends State<Multiplication> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Example',
+                    AppLocalizations.of(context)!.example,
                     style: GoogleFonts.openSans(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,

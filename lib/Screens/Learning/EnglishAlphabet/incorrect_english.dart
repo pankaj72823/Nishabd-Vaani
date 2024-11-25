@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:nishabdvaani/Provider/alphabet_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nishabdvaani/Screens/Learning/EnglishAlphabet/english_alphabet.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class IncorrectEnglish extends ConsumerWidget {
   final String selectedOption;
@@ -19,9 +20,9 @@ class IncorrectEnglish extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'Wrong',
-              style: TextStyle(
+            Text(
+              AppLocalizations.of(context)!.wrong,
+              style: const TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
                 color: Colors.red,
@@ -30,12 +31,12 @@ class IncorrectEnglish extends ConsumerWidget {
             const SizedBox(height: 20),
             Image.asset('assets/Learning/incorrect.png'), // Add your image here
             const SizedBox(height: 20),
-            const Text(
-              'Oo wrong answer',
+             Text(
+              AppLocalizations.of(context)!.wrong_answer,
               style: TextStyle(fontSize: 18),
             ),
-            const Text(
-              'Correct answer is:',
+             Text(
+               AppLocalizations.of(context)!.correct_answer,
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             Image.network(answer),
@@ -63,7 +64,7 @@ class IncorrectEnglish extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
-                  child: Text('Next', style: GoogleFonts.openSans(color: Colors.white,fontSize: 20, fontWeight: FontWeight.bold,),),
+                  child: Text(  AppLocalizations.of(context)!.next, style: GoogleFonts.openSans(color: Colors.white,fontSize: 20, fontWeight: FontWeight.bold,),),
                 ),
               ],
             ),
