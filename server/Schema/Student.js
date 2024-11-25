@@ -4,7 +4,7 @@ import AttemptedQuiz from './AttemptedQuiz.js';
 
 const dailyActivitySchema = new mongoose.Schema({
     date: { type: Date, required: true },
-    activeLevel: { type: Number, default: 0 }
+    activeLevel: { type: Number, enum : [0,1] }
 });
 
 const studentSchema = new mongoose.Schema({

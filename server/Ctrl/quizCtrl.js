@@ -14,6 +14,13 @@ function getRandomItems(arr, count) {
     const shuffled = arr.sort(() => 0.5 - Math.random());
     return shuffled.slice(0, count);
 }
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1)); // Random index from 0 to i
+      [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+    }
+    return array;
+  }
 
 // Initialize data for a student's quiz session
 export function initializeQuestionLoading(req, studentID, module) {
@@ -25,7 +32,6 @@ export function initializeQuestionLoading(req, studentID, module) {
     req.session.questionIndexes = { [studentID]: { 1: 0, 2: 0, 3: 0 } };
     req.session.score = { [studentID]: 0 };
     req.session.questionNumber = { [studentID]: 1 };
-    console.log("Session initialized:", req.session);
 }
 
 // Load unattempted questions by difficulty and store in `loadedQuestions`
@@ -93,8 +99,8 @@ export async function generateAlphaQuiz(req, student, module) {
             return {
                 question: 'Match each letter to the correct sign image.',
                 options: {
-                    columnA: selectedItems.map(item => item.alphabet),
-                    columnB: selectedItems.map(item => item.signImage),
+                    columnA: shuffleArray(selectedItems.map(item => item.alphabet)), // Shuffle letters
+                    columnB: shuffleArray(selectedItems.map(item => item.signImage)), // Shuffle images
                 },
                 correctAnswer: selectedItems.map(item => ({ alphabet: item.alphabet, signImage: item.signImage })),
                 difficulty: 3,
@@ -175,7 +181,6 @@ export function updateStreakAndDifficulty(req, student, module, correct) {
     const studentID = student._id;
     const streakKey = `${module}_${req.session.currentDifficulty[studentID]}`;
     if (!streaks[studentID][streakKey]) streaks[studentID][streakKey] = { correct: 0, incorrect: 0 };
-
     if (correct) {
         req.session.score[studentID] += 1;
         streaks[studentID][streakKey].correct += 1;
@@ -239,11 +244,13 @@ export async function startQuizSession(req, res) {
 
 // Handle answer correctness and retrieve next question
 export async function answerQuestion(req, res) {
-    const { correct } = req.body;
+    let { correct } = req.body;
+    if(typeof(correct)== "string"){
+        correct = Boolean(correct);
+    }
     const studentID = req.user._id;
     const student = await Student.findById(studentID);
     if (!student) throw new Error('Student not found');
-
     let currentDifficulty = req.session.currentDifficulty[studentID] || 1;
     if (correct !== undefined) {
         currentDifficulty = updateStreakAndDifficulty(req, student, req.session.module[studentID], correct);

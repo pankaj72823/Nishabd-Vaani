@@ -112,13 +112,13 @@ const ids = [
 const generateDailyActivity = () => {
   const activity = [];
   const now = new Date();
-  for (let i = 0; i < 365; i++) {
+  for (let i = 1; i < 10; i++) {
     const date = new Date(now);
     date.setDate(now.getDate() - i);
 
     activity.push({
       date: date,
-      activeLevel: Math.floor(Math.random() * 5) + 1 // Random active level between 1 and 5
+      activeLevel: Math.floor(Math.random() * 2)// Random active level between 1 and 5
     });
   }
   return activity;

@@ -5,7 +5,6 @@ import chalk from 'chalk';
 import { createServer } from 'http';
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
-import path from 'path';
 import passport from 'passport';
 import cors from './config/corsConfig.js';
 import './config/multer.js';
@@ -21,6 +20,7 @@ import studentRoutes from './Router/student.js';
 import fakerRoute from './Router/Faker.js';
 import quizRoute from './Router/QuizRoute.js';
 import client from 'prom-client';
+import Student from './Schema/Student.js';
 // Initialize Express and HTTP server
 displayStartupMessage();
 const app = express();
@@ -97,6 +97,67 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(async (req, res, next) => {
+  try {
+    // Attempt to authenticate the user
+    passport.authenticate('jwt', { session: false }, async (err, user) => {
+      if (err) {
+        console.error('Authentication error:', err);
+        return next(); // Skip authentication errors
+      }
+
+      if (!user) {
+        // User is not authenticated, proceed without logging activity
+        return next();
+      }
+
+      // Attach authenticated user to the request object
+      req.user = user;
+
+      const studentId = user._id; // Get the authenticated user's ID
+      const student = await Student.findById(studentId);
+
+      if (!student) {
+        return res.status(404).json({ message: 'Student not found' });
+      }
+      const today = new Date().toISOString().split('T')[0];// Get today's date in YYYY-MM-DD format
+      const existingActivity = student.dailyActivity.some((activity) => {
+        return activity.date.toISOString().split('T')[0] === today; // Added return
+      });
+
+      
+      if (existingActivity) {
+        // User is not authenticated, proceed without logging activity
+        return next();
+      }
+      // Define specific routes for logging activity
+      const specificRoutes = [
+        '/learning',
+        '/conversion',
+        '/gujBoard',
+        '/quiz',
+        '/start-websocket',
+      ];
+      const matchesPrefix = specificRoutes.some((prefix) => req.path.startsWith(prefix));
+      if (matchesPrefix) {
+          // Add a new activity entry for today
+          const newActivity = {
+            date: today,
+            activeLevel: 1,
+          };
+          student.dailyActivity = [...(student.dailyActivity || []), newActivity];
+
+        // Save the updated student document
+        await student.save();
+      }
+
+      next();
+    })(req, res, next);
+  } catch (err) {
+    console.error('Error in activity middleware:', err);
+    next(); // Proceed even if an error occurs
+  }
+});
 
 // API routes
 app.use('/students', studentRoutes);
