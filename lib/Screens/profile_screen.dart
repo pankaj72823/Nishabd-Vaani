@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nishabdvaani/Provider/language_provider.dart';
+import 'package:nishabdvaani/Provider/cookie_provider.dart';
+import 'package:nishabdvaani/Provider/tokenProvider.dart';
 import 'package:nishabdvaani/Screens/Profile/language_toggle.dart';
+import 'package:nishabdvaani/Screens/welcome.dart';
 import 'package:nishabdvaani/Widgets/Profile/result_chart.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../Widgets/Profile/streak_calendar_widget.dart';
+import 'package:nishabdvaani/Provider/profile_provider.dart';
+
 
 class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
@@ -42,21 +46,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         });
   }
 
-  void _openLanguageChangeOverlay() {
-    showModalBottomSheet(
-        useSafeArea: true,
-        isScrollControlled: true,
-        context: context,
-        builder: (ctx) {
-          return const FractionallySizedBox(
-            heightFactor: 0.75,
-            child: LanguageToggle(),
-          );
-        });
-  }
   @override
   Widget build(BuildContext context) {
-    final lang = ref.read(languageProvider);
+    // final lang = ref.read(languageProvider);
+    final profile = ref.watch(ProfileProvider);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -82,7 +75,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             const SizedBox(height: 15),
             // Name
             Text(
-              AppLocalizations.of(context)!.pankaj_kurmi,
+               profile.name,
               style: GoogleFonts.openSans(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -92,7 +85,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             const SizedBox(height: 5),
             // Phone or Email
             Text(
-              AppLocalizations.of(context)!.phone_number,
+              profile.email,
               style: GoogleFonts.openSans(
                 fontSize: 16,
                 color: Colors.grey[600],
@@ -134,7 +127,17 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 children: [
                   Row(
                     children: [
-                      const Icon(Icons.logout, color: Colors.red, size: 30,),
+                      IconButton(onPressed:  () async {
+                        await ref.read(cookieProvider.notifier).clearCookie();
+                        ref.read(tokenProvider.notifier).state = null;
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (ctx) => Welcome(),
+                          ),
+                        );
+                       },
+                      icon: const Icon(Icons.logout, color: Colors.red, size: 30,),
+                    ),
                       const SizedBox(width: 10),
                       Text(
                         AppLocalizations.of(context)!.logout,

@@ -9,6 +9,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../Provider/cookie_provider.dart';
+
 
 class Signup extends ConsumerStatefulWidget{
   const Signup({super.key});
@@ -58,13 +60,35 @@ class _Signup extends ConsumerState<Signup>{
         if (response.statusCode == 200) {
           final data = jsonDecode(response.body);
 
+
+          final cookie = response.headers['set-cookie']
+              ?.split(';')
+              .firstWhere((cookie) => cookie.trim().startsWith('connect.sid='));
+          print(cookie);
+
+          // print('connect.sid: $cookie');
+          // final cookie = response.headers['set-cookie'];
+          // print(response.headers);
+          // print(cookie);
+          if(cookie!=null) await ref.read(cookieProvider.notifier).saveCookie(cookie);
+
           if(data['token']!=null) {
             final token = data['token'];
+            print(token);
             ref.read(tokenProvider.notifier).state = token;
-
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (ctx) => TabsScreen()
+              ),
+            );
           } else{
+            Navigator.of(context).pop();
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text("Error getting token or cookie, try again ")),
+            );
             print('Token not found in response');
           }
+
         }
         else{
           print('Failed to signup. Status code: ${response.statusCode}');

@@ -65,7 +65,7 @@ class _SignIn extends ConsumerState<SignIn> {
           } else{
             Navigator.of(context).pop();
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text("Failed to Signin, try again ")),
+              const SnackBar(content: Text("Error getting token or cookie, try again ")),
             );
             print('Token not found in response');
           }

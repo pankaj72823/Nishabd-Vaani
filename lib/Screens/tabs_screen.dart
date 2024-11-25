@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nishabdvaani/Provider/profile_provider.dart';
 import 'package:nishabdvaani/Screens/Learning/learning_screen.dart';
 import 'package:nishabdvaani/Screens/conversion.dart';
 import 'package:nishabdvaani/Screens/home_screen.dart';
@@ -7,12 +8,12 @@ import 'package:nishabdvaani/Screens/practice.dart';
 import 'package:nishabdvaani/Screens/profile_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class TabsScreen extends StatefulWidget {
+class TabsScreen extends ConsumerStatefulWidget {
   @override
   _TabsScreenState createState() => _TabsScreenState();
 }
 
-class _TabsScreenState extends State<TabsScreen> {
+class _TabsScreenState extends ConsumerState<TabsScreen> {
   int _selectedPageIndex = 2; // Start with HomeScreen selected
 
   final List<Widget> _pages = [
@@ -21,6 +22,7 @@ class _TabsScreenState extends State<TabsScreen> {
     const HomeScreen(),
     const Practice(),
     // EnglishBoard(),
+
    const ProfileScreen(),
   ];
 
@@ -28,6 +30,11 @@ class _TabsScreenState extends State<TabsScreen> {
     setState(() {
       _selectedPageIndex = index;
     });
+  }
+  @override
+  void initState()  {
+    super.initState();
+     ref.read(ProfileProvider.notifier).profileDetails();
   }
 
   @override
