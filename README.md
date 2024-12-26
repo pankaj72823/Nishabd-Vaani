@@ -1,6 +1,6 @@
 # NishabdVaani
 
-**NishabdVaani** - * Empowering Silent Dreams *
+**NishabdVaani** - *Empowering Silent Dreams*
 
 ## Project Overview
 
