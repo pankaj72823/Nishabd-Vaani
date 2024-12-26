@@ -50,110 +50,94 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   Widget build(BuildContext context) {
     // final lang = ref.read(languageProvider);
     final profile = ref.watch(ProfileProvider);
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Align(
-          alignment: Alignment.center,
-          child: Text(AppLocalizations.of(context)!.profile, style: GoogleFonts.openSans(
-            fontSize: 26,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,),
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Align(
+            alignment: Alignment.center,
+            child: Text(AppLocalizations.of(context)!.profile, style: GoogleFonts.openSans(
+              fontSize: 26,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,),
+            ),
           ),
+          backgroundColor: Colors.lightBlue[100],
         ),
-        backgroundColor: Colors.lightBlue[100],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const SizedBox(height: 20),
-            const CircleAvatar(
-              radius: 60,
-              backgroundImage: AssetImage('assets/Home_Screen/card.png'),
-            ),
-            const SizedBox(height: 15),
-            // Name
-            Text(
-               profile.name,
-              style: GoogleFonts.openSans(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(height: 20),
+              const CircleAvatar(
+                radius: 60,
+                backgroundImage: AssetImage('assets/Home_Screen/card.png'),
               ),
-            ),
-            const SizedBox(height: 5),
-            // Phone or Email
-            Text(
-              profile.email,
-              style: GoogleFonts.openSans(
-                fontSize: 16,
-                color: Colors.grey[600],
-              ),
-            ),
-            const SizedBox(height: 15),
-            ElevatedButton(
-              onPressed: () {
-              },
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                backgroundColor: Colors.yellow[700],
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
-              child: Text(
-                AppLocalizations.of(context)!.edit_profile,
+              const SizedBox(height: 15),
+              // Name
+              Text(
+                 profile.name,
                 style: GoogleFonts.openSans(
-                  fontSize: 18,
-                  color: Colors.black,
+                  fontSize: 22,
                   fontWeight: FontWeight.bold,
+                  color: Colors.black,
                 ),
               ),
-            ),
-            const SizedBox(height: 30),
-
-            profileWidgets(Icons.history, AppLocalizations.of(context)!.streaks, _openStreakOverlay),
-            profileWidgets(Icons.format_list_numbered_sharp,AppLocalizations.of(context)!.scorecard, _openScoreCardOverlay),
-            LanguageToggle(),
-            // profileWidgets(Icons.settings, 'Settings', _openLanguageChangeOverlay),
-
-
-            const SizedBox(height: 28,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      IconButton(onPressed:  () async {
-                        await ref.read(cookieProvider.notifier).clearCookie();
-                        ref.read(tokenProvider.notifier).state = null;
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (ctx) => Welcome(),
-                          ),
-                        );
-                       },
-                      icon: const Icon(Icons.logout, color: Colors.red, size: 30,),
-                    ),
-                      const SizedBox(width: 10),
-                      Text(
-                        AppLocalizations.of(context)!.logout,
-                        style: GoogleFonts.openSans(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.red,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+              const SizedBox(height: 5),
+              // Phone or Email
+              Text(
+                profile.email,
+                style: GoogleFonts.openSans(
+                  fontSize: 16,
+                  color: Colors.grey[600],
+                ),
               ),
-            ),
-            const SizedBox(height: 20),
-          ],
+              const SizedBox(height: 30),
+
+              profileWidgets(Icons.history, AppLocalizations.of(context)!.streaks, _openStreakOverlay),
+              profileWidgets(Icons.format_list_numbered_sharp,AppLocalizations.of(context)!.scorecard, _openScoreCardOverlay),
+              LanguageToggle(),
+              // profileWidgets(Icons.settings, 'Settings', _openLanguageChangeOverlay),
+
+
+              const SizedBox(height: 54,),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal:20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        IconButton(onPressed:  () async {
+                          await ref.read(cookieProvider.notifier).clearCookie();
+                          ref.read(tokenProvider.notifier).state = null;
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (ctx) => Welcome(),
+                            ),
+                          );
+                         },
+                        icon: const Icon(Icons.logout, color: Colors.red, size: 30,),
+                      ),
+                        const SizedBox(width: 10),
+                        Text(
+                          AppLocalizations.of(context)!.logout,
+                          style: GoogleFonts.openSans(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
+            ],
+          ),
         ),
       ),
     );

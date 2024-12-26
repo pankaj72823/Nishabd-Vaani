@@ -343,11 +343,11 @@ class _Signup extends ConsumerState<Signup>{
                       child: ElevatedButton(
                         onPressed: () async {
                           await signup();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (ctx) => TabsScreen()
-                            ),
-                          );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(builder: (ctx) => TabsScreen()
+                          //   ),
+                          // );
                         },
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),

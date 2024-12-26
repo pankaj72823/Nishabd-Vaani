@@ -7,36 +7,40 @@ class Conversion extends StatelessWidget {
   const Conversion({super.key});
   @override
   Widget build(BuildContext context) {
-  return Scaffold(
-    backgroundColor: Colors.white,
-    appBar: AppBar(
-      title: Align(
-        alignment: Alignment.center,
-        child: Text(AppLocalizations.of(context)!.conversion_tool, style: GoogleFonts.openSans(
-        fontSize: 24,
-        fontWeight: FontWeight.bold,
-        color: Colors.black,),
-            ),
+  return PopScope(
+    canPop: false,
+    child: Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Align(
+          alignment: Alignment.center,
+          child: Text(AppLocalizations.of(context)!.conversion_tool, style: GoogleFonts.openSans(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          color: Colors.black,),
+              ),
+        ),
+      backgroundColor: Colors.lightBlue[100],
       ),
-    backgroundColor: Colors.lightBlue[100],
-    ),
-    body: Padding(
-      padding: const EdgeInsets.all(32.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          ConversionCard(
-            imagePath: 'assets/Conversion/signtotext.gif',
-            title: AppLocalizations.of(context)!.sign_to_text,
-            description: AppLocalizations.of(context)!.convert_sign_language,
-          ),
-          const SizedBox(height: 40.0),
-          ConversionCard(
-            imagePath: 'assets/Conversion/texttosign.gif',
-            title: AppLocalizations.of(context)!.text_to_sign,
-            description:AppLocalizations.of(context)!.text_to_sign,
-          ),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(32.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ConversionCard(
+              imagePath: 'assets/Conversion/signtotext.gif',
+              title: AppLocalizations.of(context)!.sign_to_text,
+              description: AppLocalizations.of(context)!.convert_sign_language,
+            ),
+            const SizedBox(height: 40.0),
+            ConversionCard(
+              imagePath: 'assets/Conversion/texttosign.gif',
+              title: AppLocalizations.of(context)!.text_to_sign,
+              description:AppLocalizations.of(context)!.text_to_sign,
+            ),
+          ],
+        ),
       ),
     ),
   );

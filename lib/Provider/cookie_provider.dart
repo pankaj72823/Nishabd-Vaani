@@ -10,7 +10,6 @@ class CookieNotifier extends StateNotifier<String?>{
   CookieNotifier(): super(null){
     loadCookie();
   }
-
   Future<void>loadCookie() async{
     final prefs = await SharedPreferences.getInstance();
     state = prefs.getString('cookies');

@@ -188,19 +188,18 @@ class _Question extends ConsumerState<Question>{
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      widget.module == 'alpha' ? quiz.difficulty==2 ?
-                                        Text(quiz.question, style: GoogleFonts.openSans(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 30,
-                                      ),)
-                                      : Image.network(quiz.question, height: 80, width:150)
-                                      :  Expanded(
+                                      widget.module == 'science'  || widget.module== 'maths' ?
+                                      Expanded(
                                         child: Text(quiz.question, style: GoogleFonts.openSans(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16,
                                         ),),
-                                      ),
-
+                                      ) : quiz.difficulty==2 ?
+                                        Text(quiz.question, style: GoogleFonts.openSans(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 30,
+                                      ),)
+                                      : Image.network(quiz.question, height: 80, width:150),
                                        const SizedBox(width: 8,),
                                     ],
                                   ),
@@ -389,9 +388,11 @@ class _Question extends ConsumerState<Question>{
                         onPressed: () async {
                           if(_isPrimary!) {
                             setState(() {
+                              print(_isPrimary);
                               submitted = true;
-                              _checkAnswer(quiz.correctAnswer);
+                               _checkAnswer(quiz.correctAnswer);
                               toggleButton();
+                              print(_isPrimary);
                               if(_selectedOption == null) _unattempted++;
                             });
                           }
@@ -404,16 +405,21 @@ class _Question extends ConsumerState<Question>{
                               ),
                               );
                             }
-                            setState(() {
-                              submitted = false;
-                              toggleButton();
-                              updateCurrentQuestion();
-                            });
+                            else {
+                              setState(() {
+                                submitted = false;
+                                print(_isPrimary);
+                                toggleButton();
+                                updateCurrentQuestion();
+                                print(_isPrimary);
+                              });
                               print(count);
-                              ref.read(counterProvider.notifier).state++;
-                              ref.read(QuizProvider.notifier)
+                              await ref
+                                  .read(counterProvider.notifier)
+                                  .state++;
+                              await ref.read(QuizProvider.notifier)
                                   .fetchNextQuestion(answer_value);
-
+                            }
                           }
                         },
                         style: ElevatedButton.styleFrom(
@@ -804,7 +810,9 @@ class _Question extends ConsumerState<Question>{
                   ),
                 ),
               ],
-            ) : null,
+            ) : Center(
+              child: CircularProgressIndicator(),
+            ),
           ),
         ),
       ),

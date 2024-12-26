@@ -4,7 +4,7 @@ import 'package:nishabdvaani/Provider/profile_provider.dart';
 import 'package:nishabdvaani/Screens/Learning/learning_screen.dart';
 import 'package:nishabdvaani/Screens/conversion.dart';
 import 'package:nishabdvaani/Screens/home_screen.dart';
-import 'package:nishabdvaani/Screens/practice.dart';
+import 'package:nishabdvaani/Screens/practice_quiz.dart';
 import 'package:nishabdvaani/Screens/profile_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -20,7 +20,7 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
     const LearningScreen(),
     const Conversion(),
     const HomeScreen(),
-    const Practice(),
+    const PracticeQuiz(),
     // EnglishBoard(),
 
    const ProfileScreen(),

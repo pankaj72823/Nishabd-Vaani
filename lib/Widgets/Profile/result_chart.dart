@@ -1,14 +1,13 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:nishabdvaani/Provider/profile_provider.dart';
 
 class ResultChart extends ConsumerWidget{
    const ResultChart({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final profile = ref.watch(ProfileProvider);
+    // final profile = ref.watch(ProfileProvider);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
@@ -110,11 +109,11 @@ class ResultChart extends ConsumerWidget{
             lineBarsData: [
               LineChartBarData(
                 spots: [
-                  FlSpot(1,profile.scienceMarks[0] as double),
-                  FlSpot(2,profile.scienceMarks[1] as double),
-                  FlSpot(3,profile.scienceMarks[2] as double),
-                  FlSpot(4,profile.scienceMarks[3] as double),
-                  FlSpot(5,profile.scienceMarks[4] as double),
+                  FlSpot(1, 4),
+                  FlSpot(2,5),
+                  FlSpot(3,7),
+                  FlSpot(4,3),
+                  FlSpot(5,6),
                 ],
                 barWidth: 5 ,
                 dotData: FlDotData(
@@ -138,27 +137,4 @@ class ResultChart extends ConsumerWidget{
     );
 
   }
-
 }
-
-// Gradient:
-
-// gradient: const LinearGradient(
-//   colors: [
-//     Color(0xff23b6e6),
-//      Color(0xffe3d39a),
-//   ],
-//   begin: Alignment.topLeft,
-//   end: Alignment.bottomRight,
-// ),
-// belowBarData: BarAreaData(
-//   show: true,
-//   gradient: const LinearGradient(
-//     colors: [
-//       Color(0xff23b6e6),
-//       Color(0xffe3d39a),
-//     ],
-//     begin: Alignment.topLeft,
-//     end: Alignment.bottomRight,
-//   ),
-// )

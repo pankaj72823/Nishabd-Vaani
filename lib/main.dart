@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nishabdvaani/Provider/cookie_provider.dart';
 import 'package:nishabdvaani/Provider/language_provider.dart';
+import 'package:nishabdvaani/Provider/tokenProvider.dart';
+import 'package:nishabdvaani/Screens/tabs_screen.dart';
 import 'package:nishabdvaani/Screens/welcome.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -16,7 +19,9 @@ class MyApp extends ConsumerWidget{
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final cookie = ref.watch(cookieProvider);
     final lang = ref.watch(languageProvider);
+    final token = ref.watch(tokenProvider);
     return MaterialApp(
       title: 'NishabdVaani',
       localizationsDelegates: const [
@@ -31,7 +36,7 @@ class MyApp extends ConsumerWidget{
         Locale('gu'),
       ],
       debugShowCheckedModeBanner: false,
-      home: Welcome(),
+      home: (cookie!=null && token!=null) ? TabsScreen() : Welcome(),
     );
   }
 }

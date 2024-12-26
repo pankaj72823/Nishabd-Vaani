@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nishabdvaani/Screens/classroom_test.dart';
+import 'package:nishabdvaani/Screens/Practice/writing_pad.dart';
 import 'package:nishabdvaani/Screens/practice_quiz.dart';
 import 'package:nishabdvaani/Widgets/Practice/practice_card.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -51,7 +51,7 @@ class _PracticeState extends State<Practice> {
             child: Column(
               children: [
                 PracticeCard(
-                  title:AppLocalizations.of(context)!.writing_practice,
+                  title:AppLocalizations.of(context)!.quiz_time,
                   imagePath: "assets/Practice_Screen/quiz.gif",
                   isSelected: selectedCardIndex == 0,
                   onTap: () => setState(() {
@@ -64,7 +64,7 @@ class _PracticeState extends State<Practice> {
                 ),
                 const SizedBox(height: 20),
                 PracticeCard(
-                  title: AppLocalizations.of(context)!.classroom_test,
+                  title: AppLocalizations.of(context)!.writing_practice,
                   imagePath: "assets/Practice_Screen/test.gif",
                   isSelected: selectedCardIndex == 1,
                   onTap: () => setState(() {
@@ -90,7 +90,7 @@ class _PracticeState extends State<Practice> {
                   );
               } else if (selectedCardIndex == 1) {
                 Navigator.push(context, MaterialPageRoute(
-                  builder: (ctx) => const ClassroomTest(),
+                  builder: (ctx) =>  WritingPad(),
                 ),
                 );
               }
